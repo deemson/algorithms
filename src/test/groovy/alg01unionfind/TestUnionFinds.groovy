@@ -14,17 +14,28 @@ class TestUnionFinds {
         return [UF1QuickFind, UF2QuickUnion, UF3WeightedQuickUnion, UF4WeightedQuickUnionWithPathCompression]
     }
 
+    static SIZE = 10
     @Parameter
     public Class<UnionFindAlgorithm> UnionFindAlgorithmClass;
     UnionFindAlgorithm unionFindAlgorithm;
 
     @Before
     void setUp() {
-        unionFindAlgorithm = UnionFindAlgorithm.newInstance()
+        unionFindAlgorithm = UnionFindAlgorithmClass.newInstance(SIZE)
     }
 
     @Test
     void test() {
-        unionFindAlgorithm.union()
+        for (i in 1..SIZE - 1) {
+            assert !unionFindAlgorithm.connected(i - 1, i)
+        }
+        unionFindAlgorithm.union(3, 5)
+        assert unionFindAlgorithm.connected(3, 5)
+        unionFindAlgorithm.union(3, 6)
+        assert unionFindAlgorithm.connected(3, 6)
+        assert unionFindAlgorithm.connected(5, 6)
+        unionFindAlgorithm.union(7, 8)
+        assert unionFindAlgorithm.connected(7, 8)
+        assert !unionFindAlgorithm.connected(3, 8)
     }
 }
