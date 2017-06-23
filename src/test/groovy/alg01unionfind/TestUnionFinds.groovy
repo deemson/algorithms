@@ -10,7 +10,7 @@ import org.junit.runners.Parameterized.Parameters
 @RunWith(Parameterized)
 class TestUnionFinds {
     @Parameters(name = '{index}: {0}')
-    static List<Class<UnionFindAlgorithm>> sortingAlgorithmClasses() {
+    static List<Class<UnionFindAlgorithm>> unionFindAlgorithmClasses() {
         return [UF1QuickFind, UF2QuickUnion, UF3WeightedQuickUnion, UF4WeightedQuickUnionWithPathCompression]
     }
 
