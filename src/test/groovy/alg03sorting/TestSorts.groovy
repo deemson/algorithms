@@ -24,7 +24,7 @@ class TestSorts {
     }
 
     @Test
-    void test() {
+    void testIntegersList() {
         def a = (1..20).toList()
         while (SortUtils.isSorted(a.toArray() as Integer[])) {
             Collections.shuffle(a)
@@ -32,5 +32,13 @@ class TestSorts {
         a = a.toArray() as Integer[]
         sortingAlgorithm.sort(a)
         assert SortUtils.isSorted(a)
+    }
+
+    @Test
+    void testBunchOfStrings() {
+        def strings = ['sup', 'hey', 'howdy', 'yo']
+        strings = strings.toArray() as String[]
+        sortingAlgorithm.sort(strings)
+        assert strings == ['hey', 'howdy', 'sup', 'yo']
     }
 }
