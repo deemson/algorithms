@@ -34,7 +34,7 @@ export class S4MergeSort<T> implements Sort<T> {
      * @param midIndex  - middle point
      * @param highIndex - high threshold
      */
-    private merge(array: T[], auxArray: T[], lowIndex: number, midIndex: number, highIndex: number) {
+    protected merge(array: T[], auxArray: T[], lowIndex: number, midIndex: number, highIndex: number) {
         for (let copyIndex = lowIndex; copyIndex <= highIndex; copyIndex++) {
             auxArray[copyIndex] = array[copyIndex];
         }

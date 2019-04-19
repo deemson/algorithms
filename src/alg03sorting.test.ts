@@ -1,10 +1,17 @@
-import {S1SelectionSort, S2InsertionSort, S3ShellSort, S4MergeSort} from "./alg03sorting";
+import {
+    S1SelectionSort,
+    S2InsertionSort,
+    S3ShellSort,
+    S4MergeSort,
+    S5BottomUpMergeSort,
+} from "./alg03sorting";
 
 describe.each([
     S1SelectionSort,
     S2InsertionSort,
     S3ShellSort,
     S4MergeSort,
+    S5BottomUpMergeSort,
 ])("Sorting Algorithms", (SortingAlgorithm) => {
     const s = new SortingAlgorithm();
     describe(`${SortingAlgorithm.name}`, () => {
