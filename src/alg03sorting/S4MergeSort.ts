@@ -10,19 +10,6 @@ export class S4MergeSort<T> implements Sort<T> {
         this.splitSortAndMergeBack(array, auxArray, 0, array.length - 1);
     }
 
-    private splitSortAndMergeBack(array: T[], auxArray: T[], lowIndex: number, highIndex: number) {
-        // If indexes cross, sorting is done.
-        if (highIndex <= lowIndex) {
-            return;
-        }
-        // Divide and conquer in action: we slice the array in two parts.
-        const midIndex = lowIndex + Math.floor((highIndex - lowIndex) / 2);
-        this.splitSortAndMergeBack(array, auxArray, lowIndex, midIndex);
-        this.splitSortAndMergeBack(array, auxArray, midIndex + 1, highIndex);
-        // then merge two parts together
-        this.merge(array, auxArray, lowIndex, midIndex, highIndex);
-    }
-
     /**
      * As the mergesort is a divide and conquer algorithm, there must be a function to glue back the
      * divided parts. Merge is that function. It merges two small sorted parts the array
@@ -64,5 +51,18 @@ export class S4MergeSort<T> implements Sort<T> {
                 lowToMidTrackerIndex += 1;
             }
         }
+    }
+
+    private splitSortAndMergeBack(array: T[], auxArray: T[], lowIndex: number, highIndex: number) {
+        // If indexes cross, sorting is done.
+        if (highIndex <= lowIndex) {
+            return;
+        }
+        // Divide and conquer in action: we slice the array in two parts.
+        const midIndex = lowIndex + Math.floor((highIndex - lowIndex) / 2);
+        this.splitSortAndMergeBack(array, auxArray, lowIndex, midIndex);
+        this.splitSortAndMergeBack(array, auxArray, midIndex + 1, highIndex);
+        // then merge two parts together
+        this.merge(array, auxArray, lowIndex, midIndex, highIndex);
     }
 }
