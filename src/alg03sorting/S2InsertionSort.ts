@@ -7,19 +7,25 @@ import {Sort} from "./Sort";
  */
 export class S2InsertionSort<T> implements Sort<T> {
     sort(array: T[]): void {
+        /**
+         * The outer loop adds an additional element to the
+         * loop below with each iteration.
+         */
         for (let outerIndex = 0; outerIndex < array.length; outerIndex++) {
             /**
-             * The enclosing loop adds an additional element to the
-             * loop below with each iteration.
+             * Each added element tries to find place in the left part (sorted part)
+             * using the inner loop below.
              */
             for (let innerIndex = outerIndex; innerIndex > 0; innerIndex--) {
                 /**
-                 * Each added element tries to find place in the left part (sorted part)
-                 * of the whole array.
+                 * If the current element is bigger than the previous,
+                 * then we found the element's place in the left (sorted) part
+                 * of the array and there's no point of running the inner loop anymore.
                  */
-                if (array[innerIndex] < array[innerIndex - 1]) {
-                    exchange(array, innerIndex, innerIndex - 1);
+                if (array[innerIndex] > array[innerIndex - 1]) {
+                    break;
                 }
+                exchange(array, innerIndex, innerIndex - 1);
             }
             /**
              * So we sort the array by gradually "inserting" additional elements to the sorted set.

@@ -1,9 +1,13 @@
-import {S1SelectionSort, S2InsertionSort} from "./alg03sorting";
+import {S1SelectionSort, S2InsertionSort, S3ShellSort} from "./alg03sorting";
 
-describe.each([S1SelectionSort, S2InsertionSort])("Sorting Algorithms", (SortingAlgorithm) => {
+describe.each([
+    S1SelectionSort,
+    S2InsertionSort,
+    S3ShellSort,
+])("Sorting Algorithms", (SortingAlgorithm) => {
     const s = new SortingAlgorithm();
     describe(`${SortingAlgorithm.name}`, () => {
-        test("1-2-3 array", () => {
+        test("123 array", () => {
             const array = [3, 2, 1];
             s.sort(array);
             expect(array).toEqual([1, 2, 3]);
@@ -17,6 +21,11 @@ describe.each([S1SelectionSort, S2InsertionSort])("Sorting Algorithms", (Sorting
             const array = [5, 19, 7, 4, 10, 1];
             s.sort(array);
             expect(array).toEqual([1, 4, 5, 7, 10, 19]);
+        });
+        test("12345 array", () => {
+            const array = [5, 4, 3, 2, 1];
+            s.sort(array);
+            expect(array).toEqual([1, 2, 3, 4, 5]);
         });
     });
 });
