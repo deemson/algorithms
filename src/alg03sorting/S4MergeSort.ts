@@ -13,56 +13,56 @@ export class S4MergeSort<T> implements Sort<T> {
     /**
      * As the mergesort is a divide and conquer algorithm, there must be a function to glue back the
      * divided parts. Merge is that function. It merges two small sorted parts the array
-     * (that span indices from-mid and mid-to respectively) into one big sorted part (that spans indices lo-hi).
-     *
-     * @param array     - array, parts of which is to be merged
-     * @param auxArray  - auxArray, such that auxArray.length == array.length
-     * @param lowIndex  - low threshold
-     * @param midIndex  - middle point
-     * @param highIndex - high threshold
+     * (that span indices left-mid and mid-right respectively)
+     * into one big sorted part (that spans indices left-right).
+     * @param array          - array, parts of which is to be merged
+     * @param auxArray       - auxArray, such that auxArray.length == array.length
+     * @param leftThreshold  - left threshold
+     * @param midThreshold   - middle point
+     * @param rightThreshold - right threshold
      */
-    protected merge(array: T[], auxArray: T[], lowIndex: number, midIndex: number, highIndex: number) {
-        for (let copyIndex = lowIndex; copyIndex <= highIndex; copyIndex++) {
+    protected merge(array: T[], auxArray: T[], leftThreshold: number, midThreshold: number, rightThreshold: number) {
+        for (let copyIndex = leftThreshold; copyIndex <= rightThreshold; copyIndex++) {
             auxArray[copyIndex] = array[copyIndex];
         }
-        let lowToMidTrackerIndex = lowIndex;
-        let midToHighTrackerIndex = midIndex + 1;
-        for (let index = lowIndex; index <= highIndex; index++) {
-            if (lowToMidTrackerIndex > midIndex) {
+        let leftPointer = leftThreshold;
+        let midPointer = midThreshold + 1;
+        for (let index = leftThreshold; index <= rightThreshold; index++) {
+            if (leftPointer > midThreshold) {
                 // The lower part is exhausted and we copy the remainder from the higher part.
-                array[index] = auxArray[midToHighTrackerIndex];
-                midToHighTrackerIndex += 1;
-            } else if (midToHighTrackerIndex > highIndex) {
+                array[index] = auxArray[midPointer];
+                midPointer += 1;
+            } else if (midPointer > rightThreshold) {
                 // The higher part is exhausted and we copy the remainder from the lower part.
-                array[index] = auxArray[lowToMidTrackerIndex];
-                lowToMidTrackerIndex += 1;
-            } else if (auxArray[midToHighTrackerIndex] < auxArray[lowToMidTrackerIndex]) {
+                array[index] = auxArray[leftPointer];
+                leftPointer += 1;
+            } else if (auxArray[midPointer] < auxArray[leftPointer]) {
                 /**
                  * Both parts are not exhausted:
-                 * we check whether the value in lowIndex..lowToMidTrackerIndex or
-                 * the value in midToHighTrackerIndex..highIndex is lower.
+                 * we check whether the value in leftThreshold..leftPointer or
+                 * the value in midPointer..rightThreshold is lower.
                  * Then we pick the value from that range and increment
-                 * lowToMidTrackerIndex or midToHighTrackerIndex correspondingly.
+                 * leftPointer or midPointer correspondingly.
                  */
-                array[index] = auxArray[midToHighTrackerIndex];
-                midToHighTrackerIndex += 1;
+                array[index] = auxArray[midPointer];
+                midPointer += 1;
             } else {
-                array[index] = auxArray[lowToMidTrackerIndex];
-                lowToMidTrackerIndex += 1;
+                array[index] = auxArray[leftPointer];
+                leftPointer += 1;
             }
         }
     }
 
-    private splitSortAndMergeBack(array: T[], auxArray: T[], lowIndex: number, highIndex: number) {
+    private splitSortAndMergeBack(array: T[], auxArray: T[], leftTheshold: number, rightThreshold: number) {
         // If indexes cross, sorting is done.
-        if (highIndex <= lowIndex) {
+        if (rightThreshold <= leftTheshold) {
             return;
         }
         // Divide and conquer in action: we slice the array in two parts.
-        const midIndex = lowIndex + Math.floor((highIndex - lowIndex) / 2);
-        this.splitSortAndMergeBack(array, auxArray, lowIndex, midIndex);
-        this.splitSortAndMergeBack(array, auxArray, midIndex + 1, highIndex);
+        const midThreshold = leftTheshold + Math.floor((rightThreshold - leftTheshold) / 2);
+        this.splitSortAndMergeBack(array, auxArray, leftTheshold, midThreshold);
+        this.splitSortAndMergeBack(array, auxArray, midThreshold + 1, rightThreshold);
         // then merge two parts together
-        this.merge(array, auxArray, lowIndex, midIndex, highIndex);
+        this.merge(array, auxArray, leftTheshold, midThreshold, rightThreshold);
     }
 }
