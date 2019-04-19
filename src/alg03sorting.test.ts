@@ -4,6 +4,7 @@ import {
     S3ShellSort,
     S4MergeSort,
     S5BottomUpMergeSort,
+    S6QuickSort,
 } from "./alg03sorting";
 
 describe.each([
@@ -12,6 +13,7 @@ describe.each([
     S3ShellSort,
     S4MergeSort,
     S5BottomUpMergeSort,
+    S6QuickSort,
 ])("Sorting Algorithms", (SortingAlgorithm) => {
     const s = new SortingAlgorithm();
     describe(`${SortingAlgorithm.name}`, () => {
