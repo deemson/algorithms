@@ -2,12 +2,18 @@ import {exchange, shuffle} from "./helpers";
 import {Sort} from "./Sort";
 
 /**
- * Divide and conquer (split-sort-merge) algorithm.
+ * Divide and conquer algorithm: put one element in place,
+ * then do the same for an element in the part of the array to the left
+ * and in the part of the array to the right of this element and so on.
  * The execution time is as fast as O(N*log2(N)).
  */
 export class S6QuickSort<T> implements Sort<T> {
     sort(array: T[]): void {
-        // Needed for performance guarantee
+        /**
+         * Shuffling statistically guarantees that the element to be put in place
+         * by the partitioning method below will be near the middle of the array
+         * for the majority of the calls.
+         */
         shuffle(array);
         this.partitionSort(array, 0, array.length - 1);
     }
