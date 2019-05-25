@@ -1,10 +1,10 @@
 import {S4MergeSort} from "./S4MergeSort";
-import {Sort} from "./Sort";
+import {S0Sort} from "./S0Sort";
 
 /**
  * It is the same merge sort, only without the recursion.
  */
-export class S5BottomUpMergeSort<T> extends S4MergeSort<T> implements Sort<T> {
+export class S5BottomUpMergeSort<T> extends S4MergeSort<T> implements S0Sort<T> {
     sort(array: T[]): void {
         const auxArray = Array<T>(array.length);
         for (let size = 1; size < array.length; size = 2 * size) {

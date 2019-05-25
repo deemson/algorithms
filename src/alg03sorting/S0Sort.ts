@@ -1,3 +1,3 @@
-export interface Sort<T> {
+export interface S0Sort<T> {
     sort(array: T[]): void;
 }

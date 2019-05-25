@@ -1,10 +1,10 @@
-import {Sort} from "./Sort";
+import {S0Sort} from "./S0Sort";
 
 /**
  * Divide and conquer (split-sort-merge) algorithm.
  * The execution time is as fast as O(N*log2(N)).
  */
-export class S4MergeSort<T> implements Sort<T> {
+export class S4MergeSort<T> implements S0Sort<T> {
     sort(array: T[]): void {
         const auxArray = Array<T>(array.length);
         this.splitSortAndMergeBack(array, auxArray, 0, array.length - 1);

@@ -1,5 +1,5 @@
 import {exchange} from "./helpers";
-import {Sort} from "./Sort";
+import {S0Sort} from "./S0Sort";
 
 /**
  * Insertion sort moves only one element at a time, thus being slow
@@ -12,7 +12,7 @@ import {Sort} from "./Sort";
  * The worst-case number of compares used by shellsort with 3x+1 sequence
  * is O(N^1.5)
  */
-export class S3ShellSort<T> implements Sort<T> {
+export class S3ShellSort<T> implements S0Sort<T> {
     sort(array: T[]): void {
         /**
          * Choose the biggest step from Knuth's shellsort step sequence

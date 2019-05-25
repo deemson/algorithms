@@ -1,11 +1,11 @@
 import {exchange} from "./helpers";
-import {Sort} from "./Sort";
+import {S0Sort} from "./S0Sort";
 
 /**
  * On average, insertion sort makes ~1/4N^2 compares and ~1/4N^2 exchanges
  * With partially sorted arrays, though, it's performance may be close to linear
  */
-export class S2InsertionSort<T> implements Sort<T> {
+export class S2InsertionSort<T> implements S0Sort<T> {
     sort(array: T[]): void {
         /**
          * The outer loop adds an additional element to the

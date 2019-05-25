@@ -1,10 +1,10 @@
 import {exchange} from "./helpers";
-import {Sort} from "./Sort";
+import {S0Sort} from "./S0Sort";
 
 /**
  * Selection sort uses ~N^2/2 compares and N exchanges
  */
-export class S1SelectionSort<T> implements Sort<T> {
+export class S1SelectionSort<T> implements S0Sort<T> {
     sort(array: T[]): void {
         for (let index = 0; index < array.length; index++) {
             /**

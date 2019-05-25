@@ -1,5 +1,5 @@
 import {exchange, shuffle} from "./helpers";
-import {Sort} from "./Sort";
+import {S0Sort} from "./S0Sort";
 
 /**
  * Divide and conquer algorithm: put one element in place,
@@ -7,7 +7,7 @@ import {Sort} from "./Sort";
  * and in the part of the array to the right of this element and so on.
  * The execution time is as fast as O(N*log2(N)).
  */
-export class S6QuickSort<T> implements Sort<T> {
+export class S6QuickSort<T> implements S0Sort<T> {
     sort(array: T[]): void {
         /**
          * Shuffling statistically guarantees that the element to be put in place
