@@ -1,7 +1,7 @@
 package alg01unionfind
 
 /**
- * Addresses the main drawback of UF2QuickUnion: threes growing too big.
+ * Addresses the main drawback of UF2QuickUnion: trees growing too big.
  * Avoid tree growth by storing tree sizes and checking it before attaching trees to each other.
  */
 open class UF3WeightedQuickUnion(size: Int) : UF2QuickUnion(size) {
