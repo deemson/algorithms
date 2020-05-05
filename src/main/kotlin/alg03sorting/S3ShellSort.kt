@@ -12,7 +12,7 @@ package alg03sorting
  * <p>
  * The worst-case number of compares used by shell sort with 3x+1 sequence is O(N^1.5).
  */
-object S3ShellSort : SortingAlgorithm {
+object S3ShellSort : Sort {
     override fun <T : Comparable<T>> sort(array: Array<T>) {
         var step = 1
         // Choosing the biggest step < a.length from Knuth's shellsort step sequence (3*x + 1).

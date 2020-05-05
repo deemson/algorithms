@@ -4,7 +4,7 @@ package alg03sorting
  * Base class for different merge sort implementations.
  * Contains trademark 'merge' function shared by these implementations.
  */
-abstract class S4AbstractMergeSort : SortingAlgorithm {
+abstract class S4AbstractMergeSort : Sort {
     /**
      * Mergesort is a divide and conquer algorithm, which means it divides the array
      * into smaller parts and sort them individually.

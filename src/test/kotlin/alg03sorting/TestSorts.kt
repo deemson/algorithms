@@ -21,7 +21,7 @@ class TestSorts {
 
     @ParameterizedTest()
     @MethodSource("sorts")
-    fun `test it sorts integers`(sort: SortingAlgorithm) {
+    fun `test it sorts integers`(sort: Sort) {
         val integers = arrayOf(42, 17, 100500, 123)
         sort.sort(integers)
         assertArrayEquals(arrayOf(17, 42, 123, 100500), integers)
@@ -29,7 +29,7 @@ class TestSorts {
 
     @ParameterizedTest()
     @MethodSource("sorts")
-    fun `test it sorts strings`(sort: SortingAlgorithm) {
+    fun `test it sorts strings`(sort: Sort) {
         val strings = arrayOf("super", "algorithm", "main")
         sort.sort(strings)
         assertArrayEquals(arrayOf("algorithm", "main", "super"), strings)

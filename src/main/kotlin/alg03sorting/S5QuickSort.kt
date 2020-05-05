@@ -2,7 +2,7 @@ package alg03sorting
 
 import kotlin.random.Random
 
-object S5QuickSort : SortingAlgorithm {
+object S5QuickSort : Sort {
 
     /**
      * This function is the core of quicksort. It ensures that an arbitrary item from the part of the array

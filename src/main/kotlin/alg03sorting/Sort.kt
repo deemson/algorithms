@@ -1,5 +1,5 @@
 package alg03sorting
 
-interface SortingAlgorithm {
+interface Sort {
     fun <T : Comparable<T>> sort(array: Array<T>)
 }

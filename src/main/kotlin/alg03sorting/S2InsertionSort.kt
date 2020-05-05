@@ -4,7 +4,7 @@ package alg03sorting
  * On average, insertion sort does ~1/4N^2 compares and ~1/4N^2 exchanges
  * With partially sorted arrays, though, it's performance may be close to linear
  */
-object S2InsertionSort : SortingAlgorithm {
+object S2InsertionSort : Sort {
     override fun <T : Comparable<T>> sort(array: Array<T>) {
         // The outer loop adds an additional element to the inner loop below with each iteration.
         for (outerIndex in array.indices) {

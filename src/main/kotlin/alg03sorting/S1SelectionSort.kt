@@ -3,7 +3,7 @@ package alg03sorting
 /**
  * Selection sort does ~N^2/2 compares and N exchanges.
  */
-object S1SelectionSort : SortingAlgorithm {
+object S1SelectionSort : Sort {
 
     override fun <T : Comparable<T>> sort(array: Array<T>) {
         for (outerIndex in array.indices) {
