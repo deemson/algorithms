@@ -1,5 +1,9 @@
 package alg01unionfind
 
+/**
+ * Another improvement for QuickUnion: compress tree paths by resetting node parents to tree roots
+ * during root lookups.
+ */
 class UF4WeightedQuickUnionWithPathCompression(size: Int) : UF3WeightedQuickUnion(size) {
     override fun treeRoot(n: Int): Int {
         val root = super.treeRoot(n)
