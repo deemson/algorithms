@@ -1,29 +1,10 @@
 package alg02stacksqueues
 
-class ArrayStack<T> : Stack<T> {
-    private var size = 0
-    private var array = Array<Any?>(2) { null }
 
-    override fun size(): Int {
-        return size
-    }
-
-    override fun isEmpty(): Boolean {
-        return size == 0
-    }
-
-    private fun resize(capacity: Int) {
-        val newArray = Array<Any?>(capacity) { null }
-        for (index in (0 until this.size)) {
-            newArray[index] = this.array[index]
-        }
-        this.array = newArray
-    }
+class ArrayStack<T> : AbstractArrayBasedCollection<T>(), Stack<T> {
 
     override fun push(item: T) {
-        if (this.size == this.array.size) {
-            this.resize(capacity = this.array.size * 2)
-        }
+        this.growArrayIfRequired()
         this.array[this.size++] = item
     }
 
@@ -32,16 +13,41 @@ class ArrayStack<T> : Stack<T> {
         // Release unused pointer
         this.array[this.size - 1] = null
         this.size--
-        if (this.size > 0 && this.size == this.array.size / 4) {
-            resize(this.array.size / 2)
-        }
+        this.shrinkArrayIfRequired()
         @Suppress("UNCHECKED_CAST")
         return untypedItem as T
     }
 
-    private inner class ArrayStackIterator<T>(private var index: Int = 0) : Iterator<T> {
+    /*
+    This iterator is used when resizing the underlying array to maintain the correct order.
+     */
+    private inner class ArrayStackIterator<T> : Iterator<T> {
+        private var index = 0
+
         override fun hasNext(): Boolean {
-            return this.index > 0
+            return this.index < size
+        }
+
+        override fun next(): T {
+            @Suppress("UNCHECKED_CAST")
+            return array[this.index++] as T
+        }
+
+    }
+
+    override fun resizedArrayContent(): Iterator<T> {
+        return ArrayStackIterator()
+    }
+
+    /*
+    This iterator is used to actually iterate through the stack.
+    As the stack is LIFO queue, the iterator returns elements in reversed order.
+     */
+    private inner class ReversedArrayStackIterator<T> : Iterator<T> {
+        private var index = size - 1
+
+        override fun hasNext(): Boolean {
+            return this.index >= 0
         }
 
         override fun next(): T {
@@ -52,7 +58,7 @@ class ArrayStack<T> : Stack<T> {
     }
 
     override fun iterator(): Iterator<T> {
-        return ArrayStackIterator()
+        return ReversedArrayStackIterator()
     }
 
 }

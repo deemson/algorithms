@@ -1,6 +1,6 @@
 package alg02stacksqueues
 
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
@@ -23,9 +23,7 @@ class TestStacks {
         stack.push("world")
         stack.push("magnificent")
         stack.push("hello")
-        for ((expected, actual) in listOf("hello", "magnificent", "world") zip stack) {
-            assertEquals(expected, actual)
-        }
+        assertArrayEquals(arrayOf("hello", "magnificent", "world"), stack.toList().toTypedArray())
     }
 
     @ParameterizedTest()
@@ -40,9 +38,7 @@ class TestStacks {
         stack.push(13)
         stack.push(42)
         stack.push(100500)
-        for ((expected, actual) in listOf(100500, 42, 13) zip stack) {
-            assertEquals(expected, actual)
-        }
+        assertArrayEquals(arrayOf(100500, 42, 13), stack.toList().toTypedArray())
     }
 
 }
