@@ -2,7 +2,7 @@ package alg02stacksqueues
 
 abstract class AbstractArrayBasedCollection<T> : Collection<T> {
     protected var size = 0
-    protected var array = Array<Any?>(2) { null }
+    protected var array = TypedArray<T>()
 
     override fun size(): Int {
         return size
@@ -17,7 +17,7 @@ abstract class AbstractArrayBasedCollection<T> : Collection<T> {
     }
 
     protected open fun resize(capacity: Int) {
-        val newArray = Array<Any?>(capacity) { null }
+        val newArray = TypedArray<T>(capacity)
         for ((index, item) in this.resizedArrayContent().withIndex()) {
             newArray[index] = item
         }

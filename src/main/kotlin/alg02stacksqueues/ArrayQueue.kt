@@ -21,9 +21,9 @@ class ArrayQueue<T> : AbstractArrayBasedCollection<T>(), Queue<T> {
     }
 
     override fun dequeue(): T {
-        val untypedItem = this.array[this.firstIndex]
-        // Release unused pointer
-        this.array[this.firstIndex] = null
+        val item = this.array[this.firstIndex]
+        // Release unused reference
+        this.array.releaseReferenceAt(this.firstIndex)
         this.size--
         this.firstIndex++
         // Wrap-around
@@ -31,11 +31,10 @@ class ArrayQueue<T> : AbstractArrayBasedCollection<T>(), Queue<T> {
             this.firstIndex = 0
         }
         this.shrinkArrayIfRequired()
-        @Suppress("UNCHECKED_CAST")
-        return untypedItem as T
+        return item
     }
 
-    private inner class ArrayQueueIterator<T>() : Iterator<T> {
+    private inner class ArrayQueueIterator : Iterator<T> {
         private var index = 0
 
         override fun hasNext(): Boolean {
@@ -43,8 +42,7 @@ class ArrayQueue<T> : AbstractArrayBasedCollection<T>(), Queue<T> {
         }
 
         override fun next(): T {
-            @Suppress("UNCHECKED_CAST")
-            val item = array[(firstIndex + this.index).rem(array.size)] as T
+            val item = array[(firstIndex + this.index).rem(array.size)]
             this.index++
             return item
         }
