@@ -1,0 +1,7 @@
+stages:
+  - test
+
+test:
+  image: openjdk:15-jdk-alpine3.11
+  script:
+    - ./gradlew test

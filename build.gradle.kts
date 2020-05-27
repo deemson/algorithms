@@ -19,6 +19,7 @@ tasks.test {
     testLogging {
         events("passed", "skipped", "failed")
     }
+    finalizedBy(tasks.jacocoTestReport)
 }
 
 val compileKotlin: KotlinCompile by tasks
@@ -35,6 +36,7 @@ jacoco {
 }
 
 tasks.jacocoTestReport {
+    dependsOn(tasks.test)
     reports {
         xml.isEnabled = true
     }
