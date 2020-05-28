@@ -9,3 +9,8 @@ lint:
   stage: build
   script:
     - ./gradlew ktlintCheck
+
+coverage:
+  stage: test
+  script:
+    - ./gradlew jacocoTestReport
