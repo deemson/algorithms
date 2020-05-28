@@ -20,14 +20,14 @@ coverage:
   script:
     - ./gradlew jacocoTestReport
   dependencies:
-    - test:test
+    - test
 
 codecov:
   image: bash:5.0.17
-  stage: test
+  stage: codecov
   before_script:
     - apk update && apk add curl
   script:
     - bash <(curl -s https://codecov.io/bash)
   dependencies:
-    - coverage:coverage
+    - coverage
