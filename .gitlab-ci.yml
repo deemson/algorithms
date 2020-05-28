@@ -4,7 +4,6 @@ stages:
   - build
   - test
 
-
 lint:
   stage: build
   script:
@@ -14,3 +13,9 @@ coverage:
   stage: test
   script:
     - ./gradlew jacocoTestReport
+
+codecov:
+  image: bash:5.0.17
+  stage: test
+  script:
+    - bash <(curl -s https://codecov.io/bash)
