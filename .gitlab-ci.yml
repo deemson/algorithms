@@ -1,18 +1,26 @@
 image: openjdk:13-jdk-alpine3.10
 
 stages:
-  - build
   - test
+  - coverage
+  - codecov
 
 lint:
-  stage: build
+  stage: test
   script:
     - ./gradlew ktlintCheck
 
-coverage:
+test:
   stage: test
   script:
+    - ./gradlew test
+
+coverage:
+  stage: coverage
+  script:
     - ./gradlew jacocoTestReport
+  dependencies:
+    - test
 
 codecov:
   image: bash:5.0.17
