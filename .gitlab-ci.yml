@@ -1,7 +1,11 @@
-stages:
-  - test
+image: openjdk:13-jdk-alpine3.10
 
-test:
-  image: openjdk:13-jdk-alpine3.10
+stages:
+  - build
+#  - test
+
+
+lint:
+  stage: build
   script:
-    - ./gradlew test
+    - ./gradlew lint
