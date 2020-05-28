@@ -17,5 +17,7 @@ coverage:
 codecov:
   image: bash:5.0.17
   stage: test
+  before_script:
+    - apk update && apk add curl
   script:
     - bash <(curl -s https://codecov.io/bash)
