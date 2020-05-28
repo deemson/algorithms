@@ -8,4 +8,4 @@ stages:
 lint:
   stage: build
   script:
-    - ./gradlew lint
+    - ./gradlew ktlintCheck
