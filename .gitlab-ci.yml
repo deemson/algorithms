@@ -21,3 +21,5 @@ codecov:
     - apk update && apk add curl
   script:
     - bash <(curl -s https://codecov.io/bash)
+  dependencies:
+    - coverage
