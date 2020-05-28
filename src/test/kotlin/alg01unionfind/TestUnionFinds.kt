@@ -1,22 +1,20 @@
 package alg01unionfind
 
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
-
 class TestUnionFinds {
-
     private companion object {
         const val size = 10
 
         @JvmStatic
         fun unionFinds() = listOf(
-                UF1QuickFind(size),
-                UF2QuickUnion(size),
-                UF3WeightedQuickUnion(size),
-                UF4WeightedQuickUnionWithPathCompression(size)
+            UF1QuickFind(size),
+            UF2QuickUnion(size),
+            UF3WeightedQuickUnion(size),
+            UF4WeightedQuickUnionWithPathCompression(size)
         )
     }
 
@@ -35,5 +33,4 @@ class TestUnionFinds {
         assertTrue(unionFind.connected(7, 8))
         assertFalse(unionFind.connected(3, 8))
     }
-
 }

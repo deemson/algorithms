@@ -1,11 +1,11 @@
 package alg02stacksqueues
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertArrayEquals
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
 class TestStacks {
-
     private companion object {
         @JvmStatic
         fun <T> stacks() = listOf(ArrayStack<T>())
@@ -40,5 +40,4 @@ class TestStacks {
         stack.push(100500)
         assertArrayEquals(arrayOf(100500, 42, 13), stack.toList().toTypedArray())
     }
-
 }

@@ -12,12 +12,11 @@ abstract class S4AbstractMergeSort : Sort {
      * and original (but sorted) content.
      * The function merges two small sorted parts the array
      * (that span indices lo-mid and mid-hi respectively) into one big sorted part (that spans indices lo-hi).
-     *
-     * @param array    - array, parts of which is to be merged
+     * @param array - array, parts of which is to be merged
      * @param auxArray - auxArray (auxArray.size == array.size)
-     * @param lo       - low threshold
-     * @param mid      - middle point
-     * @param hi       - high threshold
+     * @param lo - low threshold
+     * @param mid - middle point
+     * @param hi - high threshold
      */
     protected fun <T : Comparable<T>> merge(array: Array<T>, auxArray: Array<T>, lo: Int, mid: Int, hi: Int) {
         System.arraycopy(array, lo, auxArray, lo, hi + 1 - lo)
@@ -45,8 +44,4 @@ abstract class S4AbstractMergeSort : Sort {
             }
         }
     }
-
-
-
-
 }

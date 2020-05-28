@@ -4,9 +4,7 @@ import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
-
 class TestSorts {
-
     private companion object {
         @JvmStatic
         fun sorts() = listOf(
@@ -34,5 +32,4 @@ class TestSorts {
         sort.sort(strings)
         assertArrayEquals(arrayOf("algorithm", "main", "super"), strings)
     }
-
 }

@@ -11,9 +11,9 @@ class UF4WeightedQuickUnionWithPathCompression(size: Int) : UF3WeightedQuickUnio
         // While the parent of a node in question is not actually root node it's remapped to root
         // to compress three paths.
         while (nWithNonRootParent != root) {
-            val next_nWithNonRootParent = this.parentOf[nWithNonRootParent]
+            val nWithNonRootParentNext = this.parentOf[nWithNonRootParent]
             this.parentOf[nWithNonRootParent] = root
-            nWithNonRootParent = next_nWithNonRootParent
+            nWithNonRootParent = nWithNonRootParentNext
         }
         return root
     }

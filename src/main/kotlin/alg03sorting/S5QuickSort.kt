@@ -3,7 +3,6 @@ package alg03sorting
 import kotlin.random.Random
 
 object S5QuickSort : Sort {
-
     /**
      * This function is the core of quicksort. It ensures that an arbitrary item from the part of the array
      * from leftThreshold to rightThreshold is in place, i.e. smaller than all of the items to the left
@@ -73,5 +72,4 @@ object S5QuickSort : Sort {
         this.shuffle(array)
         sort(array, lo = 0, hi = array.size - 1)
     }
-
 }

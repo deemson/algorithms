@@ -18,6 +18,4 @@ class TypedArray<T>(size: Int = 2) {
     fun releaseReferenceAt(index: Int) {
         this.array[index] = null
     }
-
 }
-

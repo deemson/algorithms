@@ -7,7 +7,7 @@ package alg01unionfind
 open class UF3WeightedQuickUnion(size: Int) : UF2QuickUnion(size) {
 
     // Initially all trees contain only one node
-    protected val sizeOfTree: Array<Int> = Array(size) { 1 }
+    private val sizeOfTree: Array<Int> = Array(size) { 1 }
 
     /**
      * Union and find will take at most O(log(N)) operations to complete,

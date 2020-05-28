@@ -48,5 +48,4 @@ abstract class AbstractArrayBasedCollection<T> : Collection<T> {
             shrinkArray()
         }
     }
-
 }

@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.3.72"
     jacoco
+    id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
 }
 
 dependencies {
@@ -19,7 +20,6 @@ tasks.test {
     testLogging {
         events("passed", "skipped", "failed")
     }
-    finalizedBy(tasks.jacocoTestReport)
 }
 
 val compileKotlin: KotlinCompile by tasks
@@ -32,11 +32,9 @@ compileTestKotlin.kotlinOptions {
 }
 
 jacoco {
-
 }
 
 tasks.jacocoTestReport {
-    dependsOn(tasks.test)
     reports {
         xml.isEnabled = true
     }

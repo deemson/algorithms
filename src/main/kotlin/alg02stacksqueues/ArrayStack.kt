@@ -1,8 +1,6 @@
 package alg02stacksqueues
 
-
 class ArrayStack<T> : AbstractArrayBasedCollection<T>(), Stack<T> {
-
     override fun push(item: T) {
         this.growArrayIfRequired()
         this.array[this.size++] = item
@@ -30,7 +28,6 @@ class ArrayStack<T> : AbstractArrayBasedCollection<T>(), Stack<T> {
         override fun next(): T {
             return array[this.index++]
         }
-
     }
 
     override fun resizedArrayContent(): Iterator<T> {
@@ -51,11 +48,9 @@ class ArrayStack<T> : AbstractArrayBasedCollection<T>(), Stack<T> {
         override fun next(): T {
             return array[this.index--]
         }
-
     }
 
     override fun iterator(): Iterator<T> {
         return ReversedArrayStackIterator()
     }
-
 }
