@@ -20,7 +20,7 @@ coverage:
   script:
     - ./gradlew jacocoTestReport
   dependencies:
-    - test
+    - test:test
 
 codecov:
   image: bash:5.0.17
@@ -30,4 +30,4 @@ codecov:
   script:
     - bash <(curl -s https://codecov.io/bash)
   dependencies:
-    - coverage
+    - coverage:coverage
