@@ -1,5 +1,6 @@
 package alg02stacksqueues
 
+import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -9,7 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource
 class TestQueues {
     private companion object {
         @JvmStatic
-        fun <T> queues() = listOf(ArrayQueue<T>())
+        fun <T> queues() = listOf(ArrayQueue<T>(), LinkedQueue<T>())
     }
 
     @ParameterizedTest()
@@ -29,9 +30,7 @@ class TestQueues {
         queue.enqueue("magnificent")
         queue.enqueue("world")
         assertEquals(3, queue.size())
-        for ((expected, actual) in listOf("hello", "magnificent", "world") zip queue) {
-            assertEquals(expected, actual)
-        }
+        assertArrayEquals(arrayOf("hello", "magnificent", "world"), queue.toList().toTypedArray())
     }
 
     @ParameterizedTest()
@@ -46,8 +45,6 @@ class TestQueues {
         queue.enqueue(100500)
         queue.enqueue(42)
         queue.enqueue(13)
-        for ((expected, actual) in listOf(100500, 42, 13) zip queue) {
-            assertEquals(expected, actual)
-        }
+        assertArrayEquals(arrayOf(100500, 42, 13), queue.toList().toTypedArray())
     }
 }

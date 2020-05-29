@@ -8,12 +8,12 @@ import org.junit.jupiter.params.provider.MethodSource
 class TestStacks {
     private companion object {
         @JvmStatic
-        fun <T> stacks() = listOf(ArrayStack<T>())
+        fun <T> stacks() = listOf(ArrayStack<T>(), LinkedStack<T>())
     }
 
     @ParameterizedTest()
     @MethodSource("stacks")
-    fun `test it works with strings`(stack: ArrayStack<String>) {
+    fun `test it works with strings`(stack: Stack<String>) {
         stack.push("hello")
         assertEquals("hello", stack.pop())
         stack.push("world")
@@ -28,7 +28,7 @@ class TestStacks {
 
     @ParameterizedTest()
     @MethodSource("stacks")
-    fun `test it works with integers`(stack: ArrayStack<Int>) {
+    fun `test it works with integers`(stack: Stack<Int>) {
         stack.push(42)
         assertEquals(42, stack.pop())
         stack.push(100500)
