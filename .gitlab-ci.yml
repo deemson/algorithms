@@ -14,6 +14,9 @@ test:
   stage: test
   script:
     - ./gradlew test
+  artifacts:
+    paths:
+      - build/
 
 coverage:
   stage: coverage
@@ -21,6 +24,9 @@ coverage:
     - ./gradlew jacocoTestReport
   dependencies:
     - test
+  artifacts:
+    paths:
+      - build/
 
 codecov:
   image: bash:5.0.17
