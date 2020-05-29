@@ -1,9 +1,26 @@
 image: openjdk:13-jdk-alpine3.10
 
 stages:
+  - build
   - test
   - coverage
   - codecov
+
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+
+before_script:
+  - export GRADLE_USER_HOME=$(pwd)/.gradle
+
+build:
+  stage: build
+  script:
+    - ./gradlew classes testClasses -Dorg.gradle.internal.repository.max.tentavies=10 -Dorg.gradle.internal.repository.initial.backoff=500
+  artifacts:
+    paths:
+      - build/
 
 lint:
   stage: test
@@ -34,7 +51,6 @@ codecov:
   before_script:
     - apk update && apk add curl
   script:
-    - echo $CODECOV_TOKEN
     - bash <(curl -s https://codecov.io/bash) -Z -t $CODECOV_TOKEN
   dependencies:
     - coverage
