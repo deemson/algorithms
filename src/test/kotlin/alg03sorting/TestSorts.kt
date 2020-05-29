@@ -8,21 +8,43 @@ class TestSorts {
     private companion object {
         @JvmStatic
         fun sorts() = listOf(
-                S1SelectionSort,
-                S2InsertionSort,
-                S3ShellSort,
-                S4aMergeSort,
-                S4bBottomUpMergeSort,
-                S5QuickSort
+            S1SelectionSort,
+            S2InsertionSort,
+            S3ShellSort,
+            S4aMergeSort,
+            S4bBottomUpMergeSort,
+            S5QuickSort
         )
     }
 
     @ParameterizedTest()
     @MethodSource("sorts")
     fun `test it sorts integers`(sort: Sort) {
-        val integers = arrayOf(42, 17, 100500, 123)
+        val integers = arrayOf(
+            42,
+            17,
+            100500,
+            123,
+            3,
+            13,
+            256,
+            4242,
+            127
+        )
         sort.sort(integers)
-        assertArrayEquals(arrayOf(17, 42, 123, 100500), integers)
+        assertArrayEquals(
+            arrayOf(
+                3,
+                13,
+                17,
+                42,
+                123,
+                127,
+                256,
+                4242,
+                100500
+            ), integers
+        )
     }
 
     @ParameterizedTest()

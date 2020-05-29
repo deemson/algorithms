@@ -26,7 +26,7 @@ class TestUnionFinds {
         }
         unionFind.union(3, 5)
         assertTrue(unionFind.connected(3, 5))
-        unionFind.union(3, 6)
+        unionFind.union(6, 3)
         assertTrue(unionFind.connected(3, 6))
         assertTrue(unionFind.connected(5, 6))
         unionFind.union(7, 8)

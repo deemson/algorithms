@@ -20,8 +20,8 @@ object S5QuickSort : Sort {
                 }
             }
             // find item on the right to swap
-            while (array[leftThreshold] < array[--rightMarker]) {
-                if (rightMarker == leftThreshold) {
+            while (true) {
+                if (array[leftThreshold] >= array[--rightMarker]) {
                     break
                 }
             }
