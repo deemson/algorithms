@@ -18,5 +18,4 @@ class TestSortingUtils {
         exchange(array, 1, 2)
         assertArrayEquals(arrayOf(123, 17, 42), array)
     }
-
 }

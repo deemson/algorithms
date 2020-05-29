@@ -46,11 +46,9 @@ class ArrayQueue<T> : AbstractArrayBasedCollection<T>(), Queue<T> {
             this.index++
             return item
         }
-
     }
 
     override fun iterator(): Iterator<T> {
         return ArrayQueueIterator()
     }
-
 }

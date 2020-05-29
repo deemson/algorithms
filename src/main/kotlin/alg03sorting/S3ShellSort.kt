@@ -1,6 +1,5 @@
 package alg03sorting
 
-
 /**
  * Shell sort is similar to previous algorithm (S2InsertionSort).
  * Insertion sort (S2InsertionSort) moves a single element at a time, thus being slow
@@ -18,7 +17,7 @@ object S3ShellSort : Sort {
         // Choosing the biggest step < a.length from Knuth's shellsort step sequence (3*x + 1).
         while (step < array.size / 3) {
             // 1, 4, 13, 40, 121, 364, ...
-            step = 3 * step + 1;
+            step = 3 * step + 1
         }
         while (step >= 1) {
             // Make an insertion sort for all of the steps in the sequence.
@@ -35,7 +34,7 @@ object S3ShellSort : Sort {
                     exchange(array, innerIndex, innerIndex - step)
                 }
             }
-            step /= 3;
+            step /= 3
         }
     }
 }

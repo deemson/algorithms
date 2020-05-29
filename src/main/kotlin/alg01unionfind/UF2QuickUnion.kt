@@ -38,5 +38,4 @@ open class UF2QuickUnion(size: Int) : UnionFind {
         val n2TreeRoot = this.treeRoot(n2)
         parentOf[n2TreeRoot] = n1TreeRoot
     }
-
 }

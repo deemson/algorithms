@@ -5,7 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
 class TestQueues {
-
     private companion object {
         @JvmStatic
         fun <T> queues() = listOf(ArrayQueue<T>())
@@ -44,5 +43,4 @@ class TestQueues {
             assertEquals(expected, actual)
         }
     }
-
 }
