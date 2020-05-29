@@ -28,6 +28,6 @@ codecov:
   before_script:
     - apk update && apk add curl
   script:
-    - bash <(curl -s https://codecov.io/bash)
+    - bash <(curl -s https://codecov.io/bash) -Z
   dependencies:
     - coverage
