@@ -9,7 +9,7 @@ import kotlin.math.min
  * It is the same mergesort, only without the recursion.
  */
 object S4bBottomUpMergeSort : S4AbstractMergeSort() {
-    override fun <T : Comparable<T>> sort(array: Array<T>) {
+    override fun <T> sort(array: Array<T>, comparator: Comparator<T>) {
         val auxArray = array.copyOf()
         // Part size grows as 1 2 4 8 ...
         var partSize = 1
@@ -18,7 +18,7 @@ object S4bBottomUpMergeSort : S4AbstractMergeSort() {
             for (lo in 0 until array.size - partSize step 2 * partSize) {
                 val mid = lo + partSize - 1
                 val hi = min(lo + 2 * partSize - 1, array.size - 1)
-                this.merge(array, auxArray, lo, mid, hi)
+                this.merge(array, auxArray, comparator, lo, mid, hi)
             }
             partSize += partSize
         }

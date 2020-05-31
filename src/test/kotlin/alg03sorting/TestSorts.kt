@@ -45,6 +45,21 @@ class TestSorts {
                 100500
             ), integers
         )
+        sort.sortDescending(integers)
+        assertArrayEquals(
+            arrayOf(
+                100500,
+                4242,
+                256,
+                127,
+                123,
+                42,
+                17,
+                13,
+                3
+            ),
+            integers
+        )
     }
 
     @ParameterizedTest()
@@ -53,5 +68,7 @@ class TestSorts {
         val strings = arrayOf("super", "algorithm", "main")
         sort.sort(strings)
         assertArrayEquals(arrayOf("algorithm", "main", "super"), strings)
+        sort.sortDescending(strings)
+        assertArrayEquals(arrayOf("super", "main", "algorithm"), strings)
     }
 }

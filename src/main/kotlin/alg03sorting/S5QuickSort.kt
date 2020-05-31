@@ -2,26 +2,31 @@ package alg03sorting
 
 import kotlin.random.Random
 
-object S5QuickSort : Sort {
+object S5QuickSort : AbstractBaseSort() {
     /**
      * This function is the core of quicksort. It ensures that an arbitrary item from the part of the array
      * from leftThreshold to rightThreshold is in place, i.e. smaller than all of the items to the left
      * and larger than all of the items to the right of this element.
      * Method partition returns an index of the element, that was put in place.
      */
-    private fun <T : Comparable<T>> partition(array: Array<T>, leftThreshold: Int, rightThreshold: Int): Int {
+    private fun <T> partition(
+        array: Array<T>,
+        comparator: Comparator<T>,
+        leftThreshold: Int,
+        rightThreshold: Int
+    ): Int {
         var leftMarker = leftThreshold
         var rightMarker = rightThreshold + 1
         while (true) {
             // find item on the left to swap
-            while (array[++leftMarker] < array[leftThreshold]) {
+            while (comparator.compare(array[++leftMarker], array[leftThreshold]) < 0) {
                 if (leftMarker == rightThreshold) {
                     break
                 }
             }
             // find item on the right to swap
             while (true) {
-                if (array[leftThreshold] >= array[--rightMarker]) {
+                if (comparator.compare(array[leftThreshold], array[--rightMarker]) >= 0) {
                     break
                 }
             }
@@ -37,13 +42,13 @@ object S5QuickSort : Sort {
         return rightMarker
     }
 
-    private fun <T : Comparable<T>> sort(array: Array<T>, lo: Int, hi: Int) {
+    private fun <T> sort(array: Array<T>, comparator: Comparator<T>, lo: Int, hi: Int) {
         if (lo >= hi) {
             return
         }
-        val elementInPlaceIndex = partition(array, lo, hi)
-        sort(array, lo, elementInPlaceIndex - 1)
-        sort(array, elementInPlaceIndex + 1, hi)
+        val elementInPlaceIndex = partition(array, comparator, lo, hi)
+        sort(array, comparator, lo, elementInPlaceIndex - 1)
+        sort(array, comparator, elementInPlaceIndex + 1, hi)
     }
 
     private var random: Random
@@ -67,9 +72,9 @@ object S5QuickSort : Sort {
         }
     }
 
-    override fun <T : Comparable<T>> sort(array: Array<T>) {
+    override fun <T> sort(array: Array<T>, comparator: Comparator<T>) {
         // required for guaranteed performance
         this.shuffle(array)
-        sort(array, lo = 0, hi = array.size - 1)
+        sort(array, comparator, lo = 0, hi = array.size - 1)
     }
 }
