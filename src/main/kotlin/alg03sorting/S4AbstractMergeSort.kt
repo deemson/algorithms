@@ -1,10 +1,12 @@
 package alg03sorting
 
+import alg02deques.Deque
+
 /**
  * Base class for different merge sort implementations.
  * Contains trademark 'merge' function shared by these implementations.
  */
-abstract class S4AbstractMergeSort : AbstractBaseSort() {
+abstract class S4AbstractMergeSort : Sort {
     /**
      * Mergesort is a divide and conquer algorithm, which means it divides the array
      * into smaller parts and sort them individually.
@@ -12,22 +14,24 @@ abstract class S4AbstractMergeSort : AbstractBaseSort() {
      * and original (but sorted) content.
      * The function merges two small sorted parts the array
      * (that span indices lo-mid and mid-hi respectively) into one big sorted part (that spans indices lo-hi).
-     * @param array - array, parts of which is to be merged
-     * @param auxArray - auxArray (auxArray.size == array.size)
+     * @param sortable - sortable, parts of which is to be merged
+     * @param auxDequeue - auxDequeue (auxDequeue.size == sortable.size)
      * @param comparator - class used to determine order
      * @param lo - low threshold
      * @param mid - middle point
      * @param hi - high threshold
      */
     protected fun <T> merge(
-        array: Array<T>,
-        auxArray: Array<T>,
+        sortable: Sortable<T>,
+        auxDeque: Deque<T>,
         comparator: Comparator<T>,
         lo: Int,
         mid: Int,
         hi: Int
     ) {
-        System.arraycopy(array, lo, auxArray, lo, hi + 1 - lo)
+        for (index in (lo..hi)) {
+            auxDeque[index] = sortable[index]
+        }
         var leftMarker = lo
         var rightMarker = mid + 1
         for (index in lo..hi) {
@@ -35,19 +39,19 @@ abstract class S4AbstractMergeSort : AbstractBaseSort() {
                 // When the left marker has crossed the middle point, it means there's nothing left
                 // in the left part and the remainder of the right part can just be copied.
                 leftMarker > mid -> {
-                    array[index] = auxArray[rightMarker++]
+                    sortable[index] = auxDeque[rightMarker++]
                 }
                 // The same goes for the right part when the right marker crosses hi threshold.
                 rightMarker > hi -> {
-                    array[index] = auxArray[leftMarker++]
+                    sortable[index] = auxDeque[leftMarker++]
                 }
                 // At this point both parts are not exhausted, thus it's checked which part contains
-                // smaller element, then it's copied to 'array' and respective marker is increased.
-                comparator.compare(auxArray[rightMarker], auxArray[leftMarker]) < 0 -> {
-                    array[index] = auxArray[rightMarker++]
+                // smaller item, then it's copied to 'array' and respective marker is increased.
+                comparator.compare(auxDeque[rightMarker], auxDeque[leftMarker]) < 0 -> {
+                    sortable[index] = auxDeque[rightMarker++]
                 }
-                else -> { // comparator.compare(auxArray[leftMarker], auxArray[rightMarker]) < 0
-                    array[index] = auxArray[leftMarker++]
+                else -> { // comparator.compare(auxDeque[leftMarker], auxDeque[rightMarker]) < 0
+                    sortable[index] = auxDeque[leftMarker++]
                 }
             }
         }
