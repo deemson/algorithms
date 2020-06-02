@@ -2,6 +2,8 @@ package alg02stacksqueues
 
 import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
@@ -14,7 +16,11 @@ class TestStacks {
     @ParameterizedTest()
     @MethodSource("stacks")
     fun `test it works with strings`(stack: Stack<String>) {
+        assertTrue(stack.isEmpty)
+        assertEquals(0, stack.size)
         stack.push("hello")
+        assertFalse(stack.isEmpty)
+        assertEquals(1, stack.size)
         assertEquals("hello", stack.pop())
         stack.push("world")
         stack.push("hello")
@@ -23,6 +29,7 @@ class TestStacks {
         stack.push("world")
         stack.push("magnificent")
         stack.push("hello")
+        assertEquals(3, stack.size)
         assertArrayEquals(arrayOf("hello", "magnificent", "world"), stack.toList().toTypedArray())
     }
 

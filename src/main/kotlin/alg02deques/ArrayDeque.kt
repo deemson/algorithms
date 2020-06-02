@@ -1,5 +1,7 @@
 package alg02deques
 
+import java.lang.IllegalStateException
+
 class ArrayDeque<T>(capacity: Int = 2) : Deque<T> {
     private object Empty
 
@@ -16,7 +18,7 @@ class ArrayDeque<T>(capacity: Int = 2) : Deque<T> {
         get() = this.array.size
 
     private fun normalizeIndex(index: Int): Int {
-        if (index < 0 || index >= this.capacity) {
+        if (index < 0 || index >= this.size) {
             throw IndexOutOfBoundsException("$index is out of bounds")
         }
         /*
@@ -83,7 +85,14 @@ class ArrayDeque<T>(capacity: Int = 2) : Deque<T> {
         this._size++
     }
 
+    private fun assertNotEmpty() {
+        if (this.isEmpty) {
+            throw IllegalStateException("dequeue is empty")
+        }
+    }
+
     override fun removeFirst(): T {
+        assertNotEmpty()
         val item = this[0]
         this.firstItemIndex++
         if (this.firstItemIndex == this.capacity) {
@@ -95,6 +104,7 @@ class ArrayDeque<T>(capacity: Int = 2) : Deque<T> {
     }
 
     override fun removeLast(): T {
+        assertNotEmpty()
         val item = this[this._size - 1]
         this.lastItemIndex--
         if (this.lastItemIndex < 0) {

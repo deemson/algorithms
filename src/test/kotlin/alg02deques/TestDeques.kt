@@ -2,6 +2,8 @@ package alg02deques
 
 import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
@@ -69,5 +71,34 @@ class TestDeques {
         assertEquals(2, deque.removeLast())
         assertEquals(1, deque.size)
         assertEquals(3, deque.removeLast())
+    }
+
+    @ParameterizedTest()
+    @MethodSource("deques")
+    fun `test setting values and out of bounds exception`(deque: Deque<Int>) {
+        assertTrue(deque.isEmpty)
+        deque.addFirst(42)
+        assertFalse(deque.isEmpty)
+        assertEquals(42, deque[0])
+        deque[0] = 123
+        assertEquals(123, deque[0])
+        assertThrows(IndexOutOfBoundsException::class.java) {
+            deque[1]
+        }
+    }
+
+    @ParameterizedTest()
+    @MethodSource("deques")
+    fun `test removing from empty deque`(deque: Deque<Int>) {
+        assertThrows(IllegalStateException::class.java) {
+            deque.removeFirst()
+        }
+    }
+
+    @ParameterizedTest()
+    @MethodSource("deques")
+    fun `test adding first removing last`(deque: Deque<Int>) {
+        deque.addFirst(42)
+        assertEquals(42, deque.removeLast())
     }
 }
