@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource
 class TestStacks {
     private companion object {
         @JvmStatic
-        fun <T> stacks() = listOf(ArrayStack<T>(), LinkedStack<T>())
+        fun <T> stacks() = listOf(arrayStack<T>(), linkedStack<T>())
     }
 
     @ParameterizedTest()
