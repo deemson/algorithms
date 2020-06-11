@@ -1,7 +1,8 @@
 package alg03sorting
 
-interface Sortable<T> : Iterable<T> {
-    val size: Int
+import alg02stacksqueues.HasSize
+
+interface Sortable<T> : HasSize, Iterable<T> {
     val indices: IntRange
         get() = IntRange(0, this.size - 1)
 

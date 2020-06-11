@@ -101,4 +101,16 @@ class TestDeques {
         deque.addFirst(42)
         assertEquals(42, deque.removeLast())
     }
+
+    @ParameterizedTest()
+    @MethodSource("deques")
+    fun `test indices`(deque: Deque<Int>) {
+        val array = arrayOf(42, 13, 100500)
+        for (value in array) {
+            deque.addLast(value)
+        }
+        for (index in deque.indices) {
+            assertEquals(array[index], deque[index])
+        }
+    }
 }

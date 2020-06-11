@@ -1,25 +1,15 @@
 package alg03sorting
 
 import alg02deques.Deque
-
-private class AscendingOrderComparator<T : Comparable<T>> : Comparator<T> {
-    override fun compare(o1: T, o2: T): Int {
-        return o1.compareTo(o2)
-    }
-}
-
-private class DescendingOrderComparator<T : Comparable<T>> : Comparator<T> {
-    override fun compare(o1: T, o2: T): Int {
-        return o2.compareTo(o1)
-    }
-}
+import comparators.MaxComparator
+import comparators.MinComparator
 
 fun <T : Comparable<T>> Sort.sortAscending(sortable: Sortable<T>) {
-    this.sort(sortable, AscendingOrderComparator())
+    this.sort(sortable, MinComparator())
 }
 
 fun <T : Comparable<T>> Sort.sortDescending(sortable: Sortable<T>) {
-    this.sort(sortable, DescendingOrderComparator())
+    this.sort(sortable, MaxComparator())
 }
 
 fun <T : Comparable<T>> Sort.sort(sortable: Sortable<T>) {
@@ -31,11 +21,11 @@ fun <T> Sort.sort(deque: Deque<T>, comparator: Comparator<T>) {
 }
 
 fun <T : Comparable<T>> Sort.sortAscending(deque: Deque<T>) {
-    this.sort(deque, AscendingOrderComparator())
+    this.sort(deque, MinComparator())
 }
 
 fun <T : Comparable<T>> Sort.sortDescending(deque: Deque<T>) {
-    this.sort(deque, DescendingOrderComparator())
+    this.sort(deque, MaxComparator())
 }
 
 fun <T : Comparable<T>> Sort.sort(deque: Deque<T>) {
@@ -47,11 +37,11 @@ fun <T> Sort.sort(array: Array<T>, comparator: Comparator<T>) {
 }
 
 fun <T : Comparable<T>> Sort.sortAscending(array: Array<T>) {
-    this.sort(array, AscendingOrderComparator())
+    this.sort(array, MinComparator())
 }
 
 fun <T : Comparable<T>> Sort.sortDescending(array: Array<T>) {
-    this.sort(array, DescendingOrderComparator())
+    this.sort(array, MaxComparator())
 }
 
 fun <T : Comparable<T>> Sort.sort(array: Array<T>) {
