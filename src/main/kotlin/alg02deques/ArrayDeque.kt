@@ -17,10 +17,14 @@ class ArrayDeque<T>(capacity: Int = 2) : Deque<T> {
     private val capacity: Int
         get() = this.array.size
 
-    private fun normalizeIndex(index: Int): Int {
+    private fun assertIndex(index: Int) {
         if (index < 0 || index >= this.size) {
             throw IndexOutOfBoundsException("$index is out of bounds")
         }
+    }
+
+    private fun normalizeIndex(index: Int): Int {
+        this.assertIndex(index)
         /*
         As first and last item indexes are wrapped around at the end of the array
         we need to normalize indexes that come in range 0..size-1
@@ -85,6 +89,26 @@ class ArrayDeque<T>(capacity: Int = 2) : Deque<T> {
         this._size++
     }
 
+    override fun addAt(index: Int, item: T) {
+        this.growIfRequired()
+        when (index) {
+            0 -> addFirst(item)
+            this._size -> addLast(item)
+            else -> {
+                this.assertIndex(index)
+                this.lastItemIndex++
+                if (this.lastItemIndex == this.capacity) {
+                    this.lastItemIndex = 0
+                }
+                this._size++
+                for (remapIndex in this._size - 1 downTo index + 1) {
+                    this[remapIndex] = this[remapIndex - 1]
+                }
+                this[index] = item
+            }
+        }
+    }
+
     private fun assertNotEmpty() {
         if (this.isEmpty) {
             throw IllegalStateException("dequeue is empty")
@@ -113,6 +137,20 @@ class ArrayDeque<T>(capacity: Int = 2) : Deque<T> {
         this._size--
         this.shrinkIfRequired()
         return item
+    }
+
+    override fun removeAt(index: Int): T {
+        this.assertNotEmpty()
+        when (index) {
+            0 -> return this.removeFirst()
+            this._size - 1 -> return this.removeLast()
+            else -> {
+                for (swapIndex in index until this._size - 1) {
+                    this.swap(swapIndex, swapIndex + 1)
+                }
+                return this.removeLast()
+            }
+        }
     }
 
     private inner class ArrayDequeueIterator : Iterator<T> {

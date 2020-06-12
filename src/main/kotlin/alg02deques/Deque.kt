@@ -12,6 +12,8 @@ interface Deque<T> : Iterable<T> {
 
     fun addFirst(item: T)
     fun addLast(item: T)
+    fun addAt(index: Int, item: T)
     fun removeFirst(): T
+    fun removeAt(index: Int): T
     fun removeLast(): T
 }

@@ -61,6 +61,22 @@ class LinkedDeque<T> : Deque<T> {
         this._size++
     }
 
+    override fun addAt(index: Int, item: T) {
+        when (index) {
+            0 -> this.addFirst(item)
+            this._size -> this.addLast(item)
+            else -> {
+                val node = this.nodeAt(index)
+                val newNode = Node(item)
+                newNode.next = node
+                newNode.prev = node.prev
+                node.prev!!.next = newNode
+                node.prev = newNode
+                this._size++
+            }
+        }
+    }
+
     private fun assertNotEmpty() {
         if (this.isEmpty) {
             throw IllegalStateException("dequeue is empty")
@@ -91,6 +107,22 @@ class LinkedDeque<T> : Deque<T> {
             this.tail!!.next = null
         }
         return tail.item
+    }
+
+    override fun removeAt(index: Int): T {
+        this.assertNotEmpty()
+        when (index) {
+            0 -> return this.removeFirst()
+            this._size - 1 -> return this.removeLast()
+            else -> {
+                val node = this.nodeAt(index)
+                val item = node.item
+                node.prev!!.next = node.next
+                node.next!!.prev = node.prev
+                this._size--
+                return item
+            }
+        }
     }
 
     private inner class ArrayDequeueIterator : Iterator<T> {
