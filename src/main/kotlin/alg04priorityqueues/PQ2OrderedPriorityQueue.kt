@@ -3,6 +3,7 @@ package alg04priorityqueues
 import alg02deques.ArrayDeque
 import alg02deques.swap
 import comparators.MaxComparator
+import comparators.MinComparator
 
 /**
  * Another basic PQ implementation
@@ -18,6 +19,10 @@ class PQ2OrderedPriorityQueue<T>(private val comparator: Comparator<T>) : Priori
 
         fun <T : Comparable<T>> max(): PQ2OrderedPriorityQueue<T> {
             return PQ2OrderedPriorityQueue(MaxComparator())
+        }
+
+        fun <T : Comparable<T>> min(): PQ2OrderedPriorityQueue<T> {
+            return PQ2OrderedPriorityQueue(MinComparator())
         }
     }
 

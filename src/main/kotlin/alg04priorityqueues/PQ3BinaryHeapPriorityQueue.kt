@@ -3,10 +3,8 @@ package alg04priorityqueues
 import alg02deques.ArrayDeque
 import alg02deques.swap
 import comparators.MaxComparator
+import comparators.MinComparator
 
-/**
- *
- */
 class PQ3BinaryHeapPriorityQueue<T>(private val comparator: Comparator<T>) : PriorityQueue<T> {
     private val deque = ArrayDeque<T>()
 
@@ -17,6 +15,10 @@ class PQ3BinaryHeapPriorityQueue<T>(private val comparator: Comparator<T>) : Pri
 
         fun <T : Comparable<T>> max(): PQ3BinaryHeapPriorityQueue<T> {
             return PQ3BinaryHeapPriorityQueue(MaxComparator())
+        }
+
+        fun <T : Comparable<T>> min(): PQ3BinaryHeapPriorityQueue<T> {
+            return PQ3BinaryHeapPriorityQueue(MinComparator())
         }
     }
 
