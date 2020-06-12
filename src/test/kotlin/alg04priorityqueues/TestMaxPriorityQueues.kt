@@ -8,7 +8,11 @@ import org.junit.jupiter.params.provider.MethodSource
 class TestMaxPriorityQueues {
     private companion object {
         @JvmStatic
-        fun <T : Comparable<T>> priorityQueues() = listOf(PQ1UnorderedPriorityQueue<T>(), PQ2OrderedPriorityQueue<T>())
+        fun <T : Comparable<T>> priorityQueues() = listOf(
+            PQ1UnorderedPriorityQueue<T>(),
+            PQ2OrderedPriorityQueue<T>(),
+            PQ3BinaryHeapPriorityQueue<T>()
+        )
     }
 
     @ParameterizedTest()
@@ -19,8 +23,12 @@ class TestMaxPriorityQueues {
         priorityQueue.insert(42)
         priorityQueue.insert(100500)
         priorityQueue.insert(13)
+        priorityQueue.insert(1)
+        priorityQueue.insert(5)
         assertEquals(100500, priorityQueue.delete())
         assertEquals(42, priorityQueue.delete())
         assertEquals(13, priorityQueue.delete())
+        assertEquals(5, priorityQueue.delete())
+        assertEquals(1, priorityQueue.delete())
     }
 }
