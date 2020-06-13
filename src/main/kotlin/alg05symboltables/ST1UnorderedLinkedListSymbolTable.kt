@@ -2,6 +2,10 @@ package alg05symboltables
 
 import alg02deques.LinkedDeque
 
+/**
+ * Basic symbol table implementation using linked list
+ * Search and insert grows as O(2*N)
+ */
 class ST1UnorderedLinkedListSymbolTable<K, V> : AbstractSymbolTable<K, V>(), SymbolTable<K, V> {
     private val deque = LinkedDeque<Pair<K, V>>()
 
