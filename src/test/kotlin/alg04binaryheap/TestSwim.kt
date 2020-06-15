@@ -44,7 +44,7 @@ class TestSwim {
     @Test
     fun `test swim crossed indexes`() {
         val indexable = indexableOf(1, 3, 5)
-        val e = assertThrows(IllegalStateException::class.java) {
+        val e = assertThrows(IllegalArgumentException::class.java) {
             indexable.swim(1, 2)
         }
         assertEquals("fromIndex must be smaller than downToIndex (got 2 < 1)", e.message!!)
@@ -53,7 +53,7 @@ class TestSwim {
     @Test
     fun `test swim up to negative`() {
         val indexable = indexableOf(1, 3, 5)
-        val e = assertThrows(IllegalStateException::class.java) {
+        val e = assertThrows(IllegalArgumentException::class.java) {
             indexable.swim(1, -1)
         }
         assertEquals("from index must be positive (got -1)", e.message!!)
@@ -62,7 +62,7 @@ class TestSwim {
     @Test
     fun `test swim from out of bounds`() {
         val indexable = indexableOf(1, 3, 5)
-        val e = assertThrows(IllegalStateException::class.java) {
+        val e = assertThrows(IllegalArgumentException::class.java) {
             indexable.swim(4)
         }
         assertEquals("to index must be smaller than indexable size (got 4 < 3)", e.message!!)

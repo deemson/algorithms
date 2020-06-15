@@ -12,19 +12,19 @@ private fun <T> Indexable<T>.assertNotEmpty() {
 
 private fun assertFromIndex(fromIndex: Int) {
     if (fromIndex < 0) {
-        throw IllegalStateException("from index must be positive (got $fromIndex)")
+        throw IllegalArgumentException("from index must be positive (got $fromIndex)")
     }
 }
 
 private fun <T> Indexable<T>.assertToIndex(toIndex: Int) {
     if (toIndex >= this.size) {
-        throw IllegalStateException("to index must be smaller than indexable size (got $toIndex < ${this.size})")
+        throw IllegalArgumentException("to index must be smaller than indexable size (got $toIndex < ${this.size})")
     }
 }
 
 private fun assertIndexesRange(fromIndex: Int, downToIndex: Int) {
     if (fromIndex > downToIndex) {
-        throw IllegalStateException("fromIndex must be smaller than downToIndex (got $fromIndex < $downToIndex)")
+        throw IllegalArgumentException("fromIndex must be smaller than downToIndex (got $fromIndex < $downToIndex)")
     }
 }
 

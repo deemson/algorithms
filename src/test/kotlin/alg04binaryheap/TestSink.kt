@@ -53,7 +53,7 @@ class TestSink {
     @Test
     fun `test sink crossed indexes`() {
         val indexable = indexableOf(1, 3, 5)
-        val e = assertThrows(IllegalStateException::class.java) {
+        val e = assertThrows(IllegalArgumentException::class.java) {
             indexable.sink(2, 1)
         }
         assertEquals("fromIndex must be smaller than downToIndex (got 2 < 1)", e.message!!)
@@ -62,7 +62,7 @@ class TestSink {
     @Test
     fun `test sink from negative`() {
         val indexable = indexableOf(1, 3, 5)
-        val e = assertThrows(IllegalStateException::class.java) {
+        val e = assertThrows(IllegalArgumentException::class.java) {
             indexable.sink(-1)
         }
         assertEquals("from index must be positive (got -1)", e.message!!)
@@ -71,7 +71,7 @@ class TestSink {
     @Test
     fun `test sink down to out of bounds`() {
         val indexable = indexableOf(1, 3, 5)
-        val e = assertThrows(IllegalStateException::class.java) {
+        val e = assertThrows(IllegalArgumentException::class.java) {
             indexable.sink(1, 4)
         }
         assertEquals("to index must be smaller than indexable size (got 4 < 3)", e.message!!)
