@@ -20,11 +20,14 @@ class TestSymbolTables {
         assertFalse(st.contains("some"))
         st["one"] = 1
         st["two"] = 2
+        assertEquals(2, st["two"])
+        st["two"] = 4
+        assertEquals(4, st["two"])
         st["three"] = 3
         assertEquals(3, st.size)
         assertEquals(setOf("one", "two", "three"), st.keys().asSequence().toSet())
-        assertEquals(setOf(1, 2, 3), st.values().asSequence().toSet())
-        assertEquals(setOf(Pair("one", 1), Pair("two", 2), Pair("three", 3)), st.toSet())
+        assertEquals(setOf(1, 4, 3), st.values().asSequence().toSet())
+        assertEquals(setOf(Pair("one", 1), Pair("two", 4), Pair("three", 3)), st.toSet())
         st.delete("two")
         assertEquals(setOf(Pair("one", 1), Pair("three", 3)), st.toSet())
     }
