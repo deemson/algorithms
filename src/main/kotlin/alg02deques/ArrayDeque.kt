@@ -1,8 +1,6 @@
 package alg02deques
 
-import java.lang.IllegalStateException
-
-class ArrayDeque<T>(capacity: Int = 2) : Deque<T> {
+class ArrayDeque<T>(capacity: Int = 2) : AbstractDeque<T>(), Deque<T> {
     private object Empty
 
     private var array = Array<Any?>(capacity) { Empty }

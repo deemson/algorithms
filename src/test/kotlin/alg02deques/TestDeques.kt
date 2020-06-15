@@ -3,6 +3,7 @@ package alg02deques
 import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.params.ParameterizedTest
@@ -152,5 +153,19 @@ class TestDeques {
         assertArrayEquals(arrayOf(7, 13, 100500, 42), deque.toList().toTypedArray())
         assertEquals(13, deque.removeAt(1))
         assertArrayEquals(arrayOf(7, 100500, 42), deque.toList().toTypedArray())
+    }
+
+    @ParameterizedTest()
+    @MethodSource("deques")
+    fun `test equals`(deque: Deque<Int>) {
+        for (item in arrayOf(1, 2, 3)) {
+            deque.addLast(item)
+        }
+        assertEquals(deque, deque)
+        assertEquals(arrayDequeOf(1, 2, 3), deque)
+        assertNotEquals("hello", deque)
+        assertNotEquals(listOf(1, 2, 3), deque)
+        assertNotEquals(arrayDequeOf(1, 2), deque)
+        assertNotEquals(arrayDequeOf(1, 2, 5), deque)
     }
 }

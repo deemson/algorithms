@@ -1,6 +1,6 @@
 package alg03ordered
 
-class OrderedArrayAdapter<T>(private val array: Array<T>) : Ordered<T> {
+class OrderedArrayAdapter<T>(private val array: Array<T>) : AbstractOrdered<T>(), Ordered<T> {
     override val size: Int
         get() = this.array.size
 
