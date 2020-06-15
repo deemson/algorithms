@@ -1,8 +1,8 @@
-package alg03sorting
+package alg03ordered
 
 import alg02deques.Deque
 
-class SortableDequeAdapter<T>(private val deque: Deque<T>) : Sortable<T> {
+class OrderedDequeAdapter<T>(private val deque: Deque<T>) : Ordered<T> {
     override val size: Int
         get() = this.deque.size
 

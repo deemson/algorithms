@@ -1,8 +1,8 @@
-package alg03sorting
+package alg03ordered
 
 import alg02stacksqueues.HasSize
 
-interface Sortable<T> : HasSize, Iterable<T> {
+interface Ordered<T> : HasSize, Iterable<T> {
     val indices: IntRange
         get() = IntRange(0, this.size - 1)
 

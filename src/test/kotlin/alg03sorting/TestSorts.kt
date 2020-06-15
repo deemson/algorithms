@@ -1,6 +1,7 @@
 package alg03sorting
 
 import alg02deques.ArrayDeque
+import alg03ordered.OrderedArrayAdapter
 import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
@@ -89,7 +90,7 @@ class TestSorts {
     @ParameterizedTest()
     @MethodSource("sorts")
     fun `test it sorts strings through sortable adapter`(sort: Sort) {
-        val strings = SortableArrayAdapter(arrayOf("super", "algorithm", "main"))
+        val strings = OrderedArrayAdapter(arrayOf("super", "algorithm", "main"))
         sort.sort(strings)
         assertArrayEquals(arrayOf("algorithm", "main", "super"), strings.toList().toTypedArray())
         sort.sortDescending(strings)
