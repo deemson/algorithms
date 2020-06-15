@@ -1,15 +1,15 @@
-package alg03ordered
+package alg03indexable
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Test
 
-class TestOrdered {
+class TestIndexable {
     @Test
     fun `test equals`() {
         val ordered = orderedOf(1, 2, 3)
         assertEquals(ordered, ordered)
-        assertEquals(OrderedArrayAdapter(arrayOf(1, 2, 3)), ordered)
+        assertEquals(IndexableArrayAdapter(arrayOf(1, 2, 3)), ordered)
         assertNotEquals(orderedOf(1, 2), ordered)
         assertNotEquals(orderedOf(1, 2, 5), ordered)
     }

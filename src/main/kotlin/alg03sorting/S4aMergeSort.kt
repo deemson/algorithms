@@ -2,7 +2,7 @@ package alg03sorting
 
 import alg02deques.ArrayDeque
 import alg02deques.Deque
-import alg03ordered.Ordered
+import alg03indexable.Indexable
 
 /**
  * Divide and conquer (split-sort-merge) algorithm.
@@ -10,7 +10,7 @@ import alg03ordered.Ordered
  * Traditional recursion implementation.
  */
 object S4aMergeSort : S4AbstractMergeSort() {
-    private fun <T> sort(ordered: Ordered<T>, auxDeque: Deque<T>, comparator: Comparator<T>, lo: Int, hi: Int) {
+    private fun <T> sort(indexable: Indexable<T>, auxDeque: Deque<T>, comparator: Comparator<T>, lo: Int, hi: Int) {
         // If the indexes overlap the sorting is done.
         if (hi <= lo) {
             return
@@ -18,17 +18,17 @@ object S4aMergeSort : S4AbstractMergeSort() {
         // Divide and conquer in action: the array is sliced in two parts...
         val mid = lo + (hi - lo) / 2
         // ...and each part is sorted independently...
-        sort(ordered, auxDeque, comparator, lo, mid)
-        sort(ordered, auxDeque, comparator, mid + 1, hi)
+        sort(indexable, auxDeque, comparator, lo, mid)
+        sort(indexable, auxDeque, comparator, mid + 1, hi)
         // ... and two parts are merged back together.
-        merge(ordered, auxDeque, comparator, lo, mid, hi)
+        merge(indexable, auxDeque, comparator, lo, mid, hi)
     }
 
-    override fun <T> sort(ordered: Ordered<T>, comparator: Comparator<T>) {
-        val auxDeque = ArrayDeque<T>(ordered.size)
-        for (item in ordered) {
+    override fun <T> sort(indexable: Indexable<T>, comparator: Comparator<T>) {
+        val auxDeque = ArrayDeque<T>(indexable.size)
+        for (item in indexable) {
             auxDeque.addLast(item)
         }
-        this.sort(ordered, auxDeque, comparator, lo = 0, hi = ordered.size - 1)
+        this.sort(indexable, auxDeque, comparator, lo = 0, hi = indexable.size - 1)
     }
 }

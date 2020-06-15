@@ -1,6 +1,6 @@
-package alg03ordered
+package alg03indexable
 
-class OrderedArrayAdapter<T>(private val array: Array<T>) : AbstractOrdered<T>(), Ordered<T> {
+class IndexableArrayAdapter<T>(private val array: Array<T>) : AbstractIndexable<T>(), Indexable<T> {
     override val size: Int
         get() = this.array.size
 

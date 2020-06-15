@@ -1,7 +1,7 @@
 package alg03sorting
 
-import alg03ordered.Ordered
+import alg03indexable.Indexable
 
 interface Sort {
-    fun <T> sort(ordered: Ordered<T>, comparator: Comparator<T>)
+    fun <T> sort(indexable: Indexable<T>, comparator: Comparator<T>)
 }

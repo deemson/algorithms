@@ -3,24 +3,24 @@ package alg03sorting
 import alg02deques.Deque
 import alg03comparators.MaxComparator
 import alg03comparators.MinComparator
-import alg03ordered.Ordered
-import alg03ordered.OrderedArrayAdapter
-import alg03ordered.OrderedDequeAdapter
+import alg03indexable.Indexable
+import alg03indexable.IndexableArrayAdapter
+import alg03indexable.IndexableDequeAdapter
 
-fun <T : Comparable<T>> Sort.sortAscending(ordered: Ordered<T>) {
-    this.sort(ordered, MinComparator())
+fun <T : Comparable<T>> Sort.sortAscending(indexable: Indexable<T>) {
+    this.sort(indexable, MinComparator())
 }
 
-fun <T : Comparable<T>> Sort.sortDescending(ordered: Ordered<T>) {
-    this.sort(ordered, MaxComparator())
+fun <T : Comparable<T>> Sort.sortDescending(indexable: Indexable<T>) {
+    this.sort(indexable, MaxComparator())
 }
 
-fun <T : Comparable<T>> Sort.sort(ordered: Ordered<T>) {
-    this.sortAscending(ordered)
+fun <T : Comparable<T>> Sort.sort(indexable: Indexable<T>) {
+    this.sortAscending(indexable)
 }
 
 fun <T> Sort.sort(deque: Deque<T>, comparator: Comparator<T>) {
-    this.sort(OrderedDequeAdapter(deque), comparator)
+    this.sort(IndexableDequeAdapter(deque), comparator)
 }
 
 fun <T : Comparable<T>> Sort.sortAscending(deque: Deque<T>) {
@@ -36,7 +36,7 @@ fun <T : Comparable<T>> Sort.sort(deque: Deque<T>) {
 }
 
 fun <T> Sort.sort(array: Array<T>, comparator: Comparator<T>) {
-    this.sort(OrderedArrayAdapter(array), comparator)
+    this.sort(IndexableArrayAdapter(array), comparator)
 }
 
 fun <T : Comparable<T>> Sort.sortAscending(array: Array<T>) {

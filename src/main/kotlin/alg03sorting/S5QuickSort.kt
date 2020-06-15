@@ -1,7 +1,7 @@
 package alg03sorting
 
-import alg03ordered.Ordered
-import alg03ordered.swap
+import alg03indexable.Indexable
+import alg03indexable.swap
 import kotlin.random.Random
 
 object S5QuickSort : Sort {
@@ -11,19 +11,19 @@ object S5QuickSort : Sort {
      * and larger than all of the items to the right of this item.
      * Method partition returns an index of the item, that was put in place.
      */
-    private fun <T> partition(ordered: Ordered<T>, comparator: Comparator<T>, left: Int, right: Int): Int {
+    private fun <T> partition(indexable: Indexable<T>, comparator: Comparator<T>, left: Int, right: Int): Int {
         var leftMarker = left
         var rightMarker = right + 1
         while (true) {
             // find item on the left to swap
-            while (comparator.compare(ordered[++leftMarker], ordered[left]) < 0) {
+            while (comparator.compare(indexable[++leftMarker], indexable[left]) < 0) {
                 if (leftMarker == right) {
                     break
                 }
             }
             // find item on the right to swap
             while (true) {
-                if (comparator.compare(ordered[left], ordered[--rightMarker]) >= 0) {
+                if (comparator.compare(indexable[left], indexable[--rightMarker]) >= 0) {
                     break
                 }
             }
@@ -32,20 +32,20 @@ object S5QuickSort : Sort {
                 break
             }
             // swap
-            ordered.swap(leftMarker, rightMarker)
+            indexable.swap(leftMarker, rightMarker)
         }
-        ordered.swap(left, rightMarker)
+        indexable.swap(left, rightMarker)
         // return index of item now known to be in place
         return rightMarker
     }
 
-    private fun <T> sort(ordered: Ordered<T>, comparator: Comparator<T>, lo: Int, hi: Int) {
+    private fun <T> sort(indexable: Indexable<T>, comparator: Comparator<T>, lo: Int, hi: Int) {
         if (lo >= hi) {
             return
         }
-        val itemInPlaceIndex = partition(ordered, comparator, lo, hi)
-        sort(ordered, comparator, lo, itemInPlaceIndex - 1)
-        sort(ordered, comparator, itemInPlaceIndex + 1, hi)
+        val itemInPlaceIndex = partition(indexable, comparator, lo, hi)
+        sort(indexable, comparator, lo, itemInPlaceIndex - 1)
+        sort(indexable, comparator, itemInPlaceIndex + 1, hi)
     }
 
     private var random: Random
@@ -60,16 +60,16 @@ object S5QuickSort : Sort {
         return random.nextInt(n)
     }
 
-    private fun <T> shuffle(ordered: Ordered<T>) {
-        for (index in ordered.indices) {
-            val swapIndex = index + uniform(ordered.size - index) // between index and array.size - index
-            ordered.swap(index, swapIndex)
+    private fun <T> shuffle(indexable: Indexable<T>) {
+        for (index in indexable.indices) {
+            val swapIndex = index + uniform(indexable.size - index) // between index and array.size - index
+            indexable.swap(index, swapIndex)
         }
     }
 
-    override fun <T> sort(ordered: Ordered<T>, comparator: Comparator<T>) {
+    override fun <T> sort(indexable: Indexable<T>, comparator: Comparator<T>) {
         // required for guaranteed performance
-        this.shuffle(ordered)
-        sort(ordered, comparator, lo = 0, hi = ordered.size - 1)
+        this.shuffle(indexable)
+        sort(indexable, comparator, lo = 0, hi = indexable.size - 1)
     }
 }

@@ -1,8 +1,8 @@
-package alg03ordered
+package alg03indexable
 
 import alg02deques.Deque
 
-class OrderedDequeAdapter<T>(private val deque: Deque<T>) : AbstractOrdered<T>(), Ordered<T> {
+class IndexableDequeAdapter<T>(private val deque: Deque<T>) : AbstractIndexable<T>(), Indexable<T> {
     override val size: Int
         get() = this.deque.size
 
