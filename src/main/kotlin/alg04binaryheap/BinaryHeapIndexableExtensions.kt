@@ -70,6 +70,9 @@ fun <T> Indexable<T>.sink(comparator: Comparator<T>, atIndex: Int = 0, downToInd
     this.assertNotEmpty()
     assertFromIndex(atIndex)
     this.assertToIndex(downToIndex)
+    if (this.size == 1) {
+        return
+    }
     assertIndexesRange(atIndex, downToIndex)
     var index = atIndex
     var childIndex = childIndex(index)
@@ -94,6 +97,9 @@ fun <T> Indexable<T>.swim(comparator: Comparator<T>, atIndex: Int = this.size - 
     this.assertNotEmpty()
     assertFromIndex(upToIndex)
     this.assertToIndex(atIndex)
+    if (this.size == 1) {
+        return
+    }
     assertIndexesRange(upToIndex, atIndex)
     var index = atIndex
     var parentIndex = parentIndex(index)

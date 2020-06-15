@@ -67,4 +67,11 @@ class TestSwim {
         }
         assertEquals("to index must be smaller than indexable size (got 4 < 3)", e.message!!)
     }
+
+    @Test
+    fun `test swim single element`() {
+        val indexable = indexableOf(1)
+        indexable.swim()
+        assertEquals(listOf(1), indexable.toList())
+    }
 }

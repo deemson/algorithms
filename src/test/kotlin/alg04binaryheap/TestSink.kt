@@ -75,4 +75,11 @@ class TestSink {
         indexable.sink()
         assertEquals(listOf(1, 1, 1), indexable.toList())
     }
+
+    @Test
+    fun `test sink single element`() {
+        val indexable = indexableOf(1)
+        indexable.sink()
+        assertEquals(listOf(1), indexable.toList())
+    }
 }
