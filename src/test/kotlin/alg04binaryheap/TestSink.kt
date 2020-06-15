@@ -16,6 +16,14 @@ class TestSink {
     }
 
     @Test
+    fun `test another simple`() {
+        val indexable = indexableOf(1, 5, 3)
+        indexable.sink()
+        assertEquals(listOf(5, 1, 3), indexable.toList())
+        indexable.assertBinaryHeap()
+    }
+
+    @Test
     fun `test simple min`() {
         val indexable = indexableOf(5, 3, 1)
         indexable.sink(MinComparator())

@@ -23,16 +23,16 @@ private fun <T> Indexable<T>.assertToIndex(toIndex: Int) {
 }
 
 private fun assertIndexesRange(fromIndex: Int, downToIndex: Int) {
-    if (fromIndex >= downToIndex) {
+    if (fromIndex > downToIndex) {
         throw IllegalStateException("fromIndex must be smaller than downToIndex (got $fromIndex < $downToIndex)")
     }
 }
 
-private fun parentIndex(index: Int): Int {
-    return (index + 1) / 2 - 1
+fun parentIndex(index: Int): Int {
+    return (index - 1) / 2
 }
 
-private fun childIndex(index: Int): Int {
+fun childIndex(index: Int): Int {
     return (index + 1) * 2 - 1
 }
 
@@ -70,17 +70,17 @@ fun <T> Indexable<T>.sink(comparator: Comparator<T>, atIndex: Int = 0, downToInd
     this.assertNotEmpty()
     assertFromIndex(atIndex)
     this.assertToIndex(downToIndex)
-    if (this.size == 1) {
+    if (atIndex == downToIndex) {
         return
     }
     assertIndexesRange(atIndex, downToIndex)
     var index = atIndex
     var childIndex = childIndex(index)
     while (childIndex <= downToIndex) {
-        if (childIndex < downToIndex && comparator.compare(this[childIndex + 1], this[childIndex]) <= 0) {
+        if (childIndex < downToIndex && comparator.compare(this[childIndex], this[childIndex + 1]) > 0) {
             childIndex++
         }
-        if (comparator.compare(this[index], this[childIndex]) <= 0) {
+        if (comparator.compare(this[index], this[childIndex]) < 0) {
             break
         }
         this.swap(index, childIndex)
@@ -97,7 +97,7 @@ fun <T> Indexable<T>.swim(comparator: Comparator<T>, atIndex: Int = this.size - 
     this.assertNotEmpty()
     assertFromIndex(upToIndex)
     this.assertToIndex(atIndex)
-    if (this.size == 1) {
+    if (upToIndex == atIndex) {
         return
     }
     assertIndexesRange(upToIndex, atIndex)

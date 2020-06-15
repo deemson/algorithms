@@ -15,7 +15,8 @@ class TestSorts {
             S3ShellSort,
             S4aMergeSort,
             S4bBottomUpMergeSort,
-            S5QuickSort
+            S5QuickSort,
+            S6HeapSort
         )
     }
 
