@@ -1,11 +1,11 @@
 package alg03sorting
 
 import alg02deques.Deque
+import alg03comparators.MaxComparator
+import alg03comparators.MinComparator
 import alg03ordered.Ordered
 import alg03ordered.OrderedArrayAdapter
 import alg03ordered.OrderedDequeAdapter
-import comparators.MaxComparator
-import comparators.MinComparator
 
 fun <T : Comparable<T>> Sort.sortAscending(ordered: Ordered<T>) {
     this.sort(ordered, MinComparator())

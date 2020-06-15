@@ -1,4 +1,4 @@
-package comparators
+package alg03comparators
 
 class MinComparator<T : Comparable<T>> : Comparator<T> {
     override fun compare(o1: T, o2: T): Int {

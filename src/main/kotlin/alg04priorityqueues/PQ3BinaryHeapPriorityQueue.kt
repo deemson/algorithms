@@ -2,8 +2,8 @@ package alg04priorityqueues
 
 import alg02deques.ArrayDeque
 import alg02deques.swap
-import comparators.MaxComparator
-import comparators.MinComparator
+import alg03comparators.MaxComparator
+import alg03comparators.MinComparator
 
 class PQ3BinaryHeapPriorityQueue<T>(private val comparator: Comparator<T>) : PriorityQueue<T> {
     private val deque = ArrayDeque<T>()
