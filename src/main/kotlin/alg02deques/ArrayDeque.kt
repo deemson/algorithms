@@ -1,6 +1,6 @@
 package alg02deques
 
-class ArrayDeque<T>(capacity: Int = 2) : AbstractDeque<T>(), Deque<T> {
+class ArrayDeque<T>(capacity: Int = 2) : Deque<T> {
     private object Empty
 
     private var array = Array<Any?>(capacity) { Empty }

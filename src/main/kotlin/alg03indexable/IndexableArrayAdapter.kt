@@ -1,6 +1,6 @@
 package alg03indexable
 
-class IndexableArrayAdapter<T>(private val array: Array<T>) : AbstractIndexable<T>(), Indexable<T> {
+class IndexableArrayAdapter<T>(private val array: Array<T>) : Indexable<T> {
     override val size: Int
         get() = this.array.size
 

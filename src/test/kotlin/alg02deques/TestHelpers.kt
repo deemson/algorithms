@@ -11,7 +11,7 @@ class TestHelpers {
         for (item in arrayOf(1, 2, 3)) {
             expected.addLast(item)
         }
-        assertEquals(expected, actual)
+        assertEquals(expected.toList(), actual.toList())
     }
 
     @Test
@@ -21,7 +21,7 @@ class TestHelpers {
         for (item in arrayOf(1, 2, 3)) {
             expected.addLast(item)
         }
-        assertEquals(expected, actual)
+        assertEquals(expected.toList(), actual.toList())
     }
 
     @Test
@@ -31,6 +31,6 @@ class TestHelpers {
         for (item in arrayOf("hello", "world")) {
             expected.addLast(item)
         }
-        assertEquals(expected, actual)
+        assertEquals(expected.toList(), actual.toList())
     }
 }

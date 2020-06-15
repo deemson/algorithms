@@ -1,9 +1,7 @@
 package alg02deques
 
-import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.params.ParameterizedTest
@@ -32,7 +30,7 @@ class TestDeques {
         deque.addLast(2)
         deque.addLast(3)
         assertEquals(3, deque.size)
-        assertArrayEquals(arrayOf(1, 2, 3), deque.toList().toTypedArray())
+        assertEquals(listOf(1, 2, 3), deque.toList())
     }
 
     @ParameterizedTest()
@@ -43,7 +41,7 @@ class TestDeques {
         deque.addFirst(2)
         deque.addFirst(3)
         assertEquals(3, deque.size)
-        assertArrayEquals(arrayOf(3, 2, 1), deque.toList().toTypedArray())
+        assertEquals(listOf(3, 2, 1), deque.toList())
     }
 
     @ParameterizedTest()
@@ -69,7 +67,7 @@ class TestDeques {
         deque.addFirst(3)
         assertEquals(3, deque.size)
         assertEquals(1, deque.removeLast())
-        assertArrayEquals(arrayOf(3, 2), deque.toList().toTypedArray())
+        assertEquals(listOf(3, 2), deque.toList())
         assertEquals(2, deque.removeLast())
         assertEquals(1, deque.size)
         assertEquals(3, deque.removeLast())
@@ -120,23 +118,23 @@ class TestDeques {
     @MethodSource("deques")
     fun `test addAt and removeAt`(deque: Deque<Int>) {
         deque.addAt(0, 42)
-        assertArrayEquals(arrayOf(42), deque.toList().toTypedArray())
+        assertEquals(listOf(42), deque.toList())
         deque.addAt(1, 13)
-        assertArrayEquals(arrayOf(42, 13), deque.toList().toTypedArray())
+        assertEquals(listOf(42, 13), deque.toList())
         deque.addAt(1, 100500)
-        assertArrayEquals(arrayOf(42, 100500, 13), deque.toList().toTypedArray())
+        assertEquals(listOf(42, 100500, 13), deque.toList())
         deque.addAt(2, 7)
-        assertArrayEquals(arrayOf(42, 100500, 7, 13), deque.toList().toTypedArray())
+        assertEquals(listOf(42, 100500, 7, 13), deque.toList())
         deque.addAt(2, 123)
-        assertArrayEquals(arrayOf(42, 100500, 123, 7, 13), deque.toList().toTypedArray())
+        assertEquals(listOf(42, 100500, 123, 7, 13), deque.toList())
         assertEquals(100500, deque.removeAt(1))
-        assertArrayEquals(arrayOf(42, 123, 7, 13), deque.toList().toTypedArray())
+        assertEquals(listOf(42, 123, 7, 13), deque.toList())
         assertEquals(7, deque.removeAt(2))
-        assertArrayEquals(arrayOf(42, 123, 13), deque.toList().toTypedArray())
+        assertEquals(listOf(42, 123, 13), deque.toList())
         assertEquals(13, deque.removeAt(2))
-        assertArrayEquals(arrayOf(42, 123), deque.toList().toTypedArray())
+        assertEquals(listOf(42, 123), deque.toList())
         assertEquals(42, deque.removeAt(0))
-        assertArrayEquals(arrayOf(123), deque.toList().toTypedArray())
+        assertEquals(listOf(123), deque.toList())
     }
 
     @ParameterizedTest()
@@ -150,22 +148,8 @@ class TestDeques {
         assertEquals(1, deque.removeLast())
         deque.addFirst(13)
         deque.addFirst(7)
-        assertArrayEquals(arrayOf(7, 13, 100500, 42), deque.toList().toTypedArray())
+        assertEquals(listOf(7, 13, 100500, 42), deque.toList())
         assertEquals(13, deque.removeAt(1))
-        assertArrayEquals(arrayOf(7, 100500, 42), deque.toList().toTypedArray())
-    }
-
-    @ParameterizedTest()
-    @MethodSource("deques")
-    fun `test equals`(deque: Deque<Int>) {
-        for (item in arrayOf(1, 2, 3)) {
-            deque.addLast(item)
-        }
-        assertEquals(deque, deque)
-        assertEquals(arrayDequeOf(1, 2, 3), deque)
-        assertNotEquals("hello", deque)
-        assertNotEquals(listOf(1, 2, 3), deque)
-        assertNotEquals(arrayDequeOf(1, 2), deque)
-        assertNotEquals(arrayDequeOf(1, 2, 5), deque)
+        assertEquals(listOf(7, 100500, 42), deque.toList())
     }
 }

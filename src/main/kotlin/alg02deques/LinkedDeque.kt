@@ -1,6 +1,6 @@
 package alg02deques
 
-class LinkedDeque<T> : AbstractDeque<T>(), Deque<T> {
+class LinkedDeque<T> : Deque<T> {
     private var _size = 0
 
     private inner class Node(var item: T) {

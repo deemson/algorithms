@@ -2,7 +2,7 @@ package alg03indexable
 
 import alg02deques.Deque
 
-class IndexableDequeAdapter<T>(private val deque: Deque<T>) : AbstractIndexable<T>(), Indexable<T> {
+class IndexableDequeAdapter<T>(private val deque: Deque<T>) : Indexable<T> {
     override val size: Int
         get() = this.deque.size
 
