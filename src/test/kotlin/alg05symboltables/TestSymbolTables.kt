@@ -6,12 +6,11 @@ import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import java.lang.IllegalArgumentException
 
 class TestSymbolTables {
     private companion object {
         @JvmStatic
-        fun <K: Comparable<K>, V> symbolTables() = listOf(
+        fun <K : Comparable<K>, V> symbolTables() = listOf(
             ST1UnorderedLinkedListSymbolTable<K, V>(),
             ST2RankedBinarySearchSymbolTable<K, V>()
         )
@@ -41,6 +40,7 @@ class TestSymbolTables {
     @ParameterizedTest()
     @MethodSource("symbolTables")
     fun `test get and delete non-existing keys`(st: SymbolTable<String, Int>) {
+        // empty ST
         var e = assertThrows(IllegalArgumentException::class.java) {
             st["some"]
         }
@@ -49,6 +49,7 @@ class TestSymbolTables {
             st.delete("some")
         }
         assertEquals("key \"some\" was not found", e.message!!)
+        // adding the key last
         st["a"] = 42
         e = assertThrows(IllegalArgumentException::class.java) {
             st["some"]
@@ -58,6 +59,7 @@ class TestSymbolTables {
             st.delete("some")
         }
         assertEquals("key \"some\" was not found", e.message!!)
+        // adding the key in-between keys
         st["z"] = 100500
         e = assertThrows(IllegalArgumentException::class.java) {
             st["some"]
