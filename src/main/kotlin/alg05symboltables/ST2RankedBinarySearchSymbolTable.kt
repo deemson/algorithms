@@ -49,17 +49,17 @@ class ST2RankedBinarySearchSymbolTable<K, V>(private val comparator: Comparator<
 
     override fun get(key: K): V {
         if (this.isEmpty) {
-            throw this.illegalKeyException(key)
+            throw IllegalKeyException(key)
         }
         val rank = this.rank(key)
         if (rank == this.size) {
-            throw this.illegalKeyException(key)
+            throw IllegalKeyException(key)
         }
         val pair = this.deque[rank]
         if (pair.first == key) {
             return pair.second
         } else {
-            throw this.illegalKeyException(key)
+            throw IllegalKeyException(key)
         }
     }
 
@@ -75,17 +75,17 @@ class ST2RankedBinarySearchSymbolTable<K, V>(private val comparator: Comparator<
 
     override fun delete(key: K) {
         if (this.isEmpty) {
-            throw this.illegalKeyException(key)
+            throw IllegalKeyException(key)
         }
         val rank = this.rank(key)
         if (rank == this.size) {
-            throw this.illegalKeyException(key)
+            throw IllegalKeyException(key)
         }
         val pair = this.deque[rank]
         if (pair.first == key) {
             this.deque.removeAt(rank)
         } else {
-            throw this.illegalKeyException(key)
+            throw IllegalKeyException(key)
         }
     }
 

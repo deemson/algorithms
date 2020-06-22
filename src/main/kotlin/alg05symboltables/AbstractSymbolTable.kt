@@ -28,8 +28,4 @@ abstract class AbstractSymbolTable<K, V> : SymbolTable<K, V> {
     override fun values(): Iterator<V> {
         return ValuesIterator()
     }
-
-    protected fun illegalKeyException(key: K): IllegalArgumentException {
-        return IllegalArgumentException("key \"$key\" was not found")
-    }
 }

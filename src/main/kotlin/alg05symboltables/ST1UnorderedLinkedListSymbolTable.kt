@@ -24,7 +24,7 @@ class ST1UnorderedLinkedListSymbolTable<K, V> : AbstractSymbolTable<K, V>(), Sym
     override fun get(key: K): V {
         val index = this.findIndex(key)
         if (index == -1) {
-            throw this.illegalKeyException(key)
+            throw IllegalKeyException(key)
         } else {
             return this.deque[index].second
         }
@@ -47,7 +47,7 @@ class ST1UnorderedLinkedListSymbolTable<K, V> : AbstractSymbolTable<K, V>(), Sym
     override fun delete(key: K) {
         val index = this.findIndex(key)
         if (index == -1) {
-            throw this.illegalKeyException(key)
+            throw IllegalKeyException(key)
         } else {
             this.deque.removeAt(index)
         }
