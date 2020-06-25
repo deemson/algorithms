@@ -9,9 +9,7 @@ import alg05redblackbinarysearchtree.RedBlackBinarySearchTreeImpl
 import alg05redblackbinarysearchtree.RedBlackIllegalValueException
 import alg05redblackbinarysearchtree.RedBlackNode
 
-class ST3RedBlackBinarySearchTreeSymbolTable<K, V>(private val comparator: Comparator<K>) :
-    AbstractSymbolTable<K, V>(),
-    SymbolTable<K, V> {
+class ST3RedBlackBinarySearchTreeSymbolTable<K, V>(private val comparator: Comparator<K>) : SymbolTable<K, V> {
 
     companion object {
         operator fun <K : Comparable<K>, V> invoke(): ST3RedBlackBinarySearchTreeSymbolTable<K, V> {

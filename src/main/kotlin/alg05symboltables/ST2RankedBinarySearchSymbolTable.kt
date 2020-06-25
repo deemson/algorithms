@@ -3,9 +3,7 @@ package alg05symboltables
 import alg02deques.arrayDequeOf
 import alg03comparators.MinComparator
 
-class ST2RankedBinarySearchSymbolTable<K, V>(private val comparator: Comparator<K>) :
-    AbstractSymbolTable<K, V>(),
-    SymbolTable<K, V> {
+class ST2RankedBinarySearchSymbolTable<K, V>(private val comparator: Comparator<K>) : SymbolTable<K, V> {
 
     private val deque = arrayDequeOf<Pair<K, V>>()
 
