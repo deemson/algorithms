@@ -1,6 +1,6 @@
 package alg02deques
 
-class ArrayDeque<T>(capacity: Int = 2, private val loadFactor: Double = 1.0) : Deque<T> {
+class ArrayDeque<T>(capacity: Int = 2) : Deque<T> {
     private object Empty
 
     private var array = Array<Any?>(capacity) { Empty }
@@ -14,9 +14,6 @@ class ArrayDeque<T>(capacity: Int = 2, private val loadFactor: Double = 1.0) : D
 
     private val capacity: Int
         get() = this.array.size
-
-    private val load: Double
-        get() = this.size.toDouble() / this.capacity
 
     private fun assertIndex(index: Int) {
         if (index < 0 || index >= this.size) {
@@ -54,7 +51,7 @@ class ArrayDeque<T>(capacity: Int = 2, private val loadFactor: Double = 1.0) : D
     }
 
     private fun growIfRequired() {
-        if (this.load >= this.loadFactor) {
+        if (this._size == this.capacity) {
             this.resize(this.capacity * 2)
         }
     }
@@ -65,7 +62,7 @@ class ArrayDeque<T>(capacity: Int = 2, private val loadFactor: Double = 1.0) : D
         It is resized at quarter capacity to avoid "thrashing" (constant resizing)
         when working with half-full array and doing add-remove operations.
         */
-        if (this._size > 0 && this.load <= this.loadFactor) {
+        if (this._size > 0 && this._size == this.capacity / 4) {
             this.resize(this.capacity / 2)
         }
     }
