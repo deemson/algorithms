@@ -13,7 +13,8 @@ class TestSymbolTables {
         fun <K : Comparable<K>, V> symbolTables() = listOf(
             ST1UnorderedLinkedListSymbolTable<K, V>(),
             ST2RankedBinarySearchSymbolTable<K, V>(),
-            ST3RedBlackBinarySearchTreeSymbolTable<K, V>()
+            ST3RedBlackBinarySearchTreeSymbolTable<K, V>(),
+            ST4HashSymbolTable<K, V>()
         )
     }
 
@@ -84,5 +85,19 @@ class TestSymbolTables {
         assertThrows(IllegalKeyException::class.java) {
             st["a"]
         }
+    }
+
+    @ParameterizedTest()
+    @MethodSource("symbolTables")
+    fun `test additional cases for hash table resize`(st: SymbolTable<String, Int>) {
+        st["a"] = 1
+        st["b"] = 2
+        st["c"] = 3
+        st["d"] = 4
+        st.delete("b")
+        st.delete("c")
+        st.delete("d")
+        assertEquals(1, st.size)
+        assertEquals(1, st["a"])
     }
 }
