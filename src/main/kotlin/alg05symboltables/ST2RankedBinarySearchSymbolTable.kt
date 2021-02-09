@@ -16,9 +16,9 @@ class ST2RankedBinarySearchSymbolTable<K, V>(private val comparator: Comparator<
     override val size: Int
         get() = this.deque.size
 
-    /*
-        returns the number of keys in this symbol table strictly less than key
-         */
+    /**
+     * returns the number of keys in this symbol table strictly less than key
+     */
     private fun rank(key: K): Int {
         var lo = 0
         var hi = this.deque.size - 1
