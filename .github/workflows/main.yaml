@@ -1,6 +1,12 @@
 name: Algorithms CI
 on: [ push ]
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Lint code
+        run: ./gradlew ktlintCheck
   build:
     runs-on: ubuntu-latest
     steps:
@@ -19,9 +25,10 @@ jobs:
             ${{ runner.os }}-gradle-
       - name: Build test classes
         run: ./gradlew classes testClasses -Dorg.gradle.internal.repository.max.tentavies=10 -Dorg.gradle.internal.repository.initial.backoff=500
-  lint:
+  test:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - uses: actions/checkout@v2
-      - name: Lint code
-        run: ./gradlew ktlintCheck
+      - name: Run tests
+        run: ./gradlew test
