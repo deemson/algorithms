@@ -19,3 +19,9 @@ jobs:
             ${{ runner.os }}-gradle-
       - name: Build test classes
         run: ./gradlew classes testClasses -Dorg.gradle.internal.repository.max.tentavies=10 -Dorg.gradle.internal.repository.initial.backoff=500
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Lint code
+        run: ./gradlew ktlintCheck
