@@ -8,5 +8,14 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 15
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
       - name: Build test classes
         run: ./gradlew classes testClasses -Dorg.gradle.internal.repository.max.tentavies=10 -Dorg.gradle.internal.repository.initial.backoff=500
