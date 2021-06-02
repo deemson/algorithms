@@ -10,6 +10,11 @@ There are several abstractions added to reduce code duplication and make it
 a bit more re-usable across different algorithms. There are also tests
 added to check the implementations and show how the algorithms are used.
 
+## How to use ##
+
+The code in this repo is meant to be an educational supplement. You can use
+`./gradlew test` (or `./gradlew.bat test` if you're on Windows) to run all tests.
+
 ## Contents ##
 
 ### 01. Union Find ###
