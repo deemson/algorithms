@@ -29,7 +29,7 @@ open class UF2QuickUnion(size: Int) : UnionFind {
     }
 
     /**
-     * To union two nodes their the root of one node is set as a parent to the root of another node
+     * To union two nodes the root of one node is set as a parent to the root of another node
      * (which root is parent to which does not matter) creating a bigger tree in a process.
      * This implementation sets the root of the n1 as a parent to the root of n2.
      */
