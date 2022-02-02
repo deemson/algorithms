@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from typing import TypeVar, Iterable, Iterator
+from typing import TypeVar, Iterable
 
 T = TypeVar("T")
 
@@ -17,42 +17,42 @@ class Deque(Iterable[T], metaclass=ABCMeta):
         return self.size == 0
 
     @abstractmethod
-    def push_head(self, item: T) -> None:
+    def push_head(self, item: T) -> None:  # pragma: no cover
         raise NotImplementedError()
 
     @abstractmethod
-    def push_tail(self, item: T) -> None:
+    def push_tail(self, item: T) -> None:  # pragma: no cover
         raise NotImplementedError()
 
     @abstractmethod
-    def push_at(self, index: int, item: T) -> None:
+    def push_at(self, index: int, item: T) -> None:  # pragma: no cover
+        raise NotImplementedError()
+
+    def _assert_not_empty(self) -> None:
+        if self.is_empty:
+            raise AssertionError("deque is empty: cannot pop elements from it")
+
+    @abstractmethod
+    def pop_head(self) -> T:  # pragma: no cover
         raise NotImplementedError()
 
     @abstractmethod
-    def pop_head(self) -> T:
+    def pop_tail(self) -> T:  # pragma: no cover
         raise NotImplementedError()
 
     @abstractmethod
-    def pop_tail(self) -> T:
+    def pop_at(self, index: int) -> T:  # pragma: no cover
         raise NotImplementedError()
 
     @abstractmethod
-    def pop_at(self, index: int) -> T:
+    def __getitem__(self, index: int) -> T:  # pragma: no cover
         raise NotImplementedError()
 
     @abstractmethod
-    def __getitem__(self, index: int) -> T:
-        raise NotImplementedError()
-
-    @abstractmethod
-    def __setitem__(self, index: int, item: T) -> None:
+    def __setitem__(self, index: int, item: T) -> None:  # pragma: no cover
         raise NotImplementedError()
 
     def swap(self, index1: int, index2: int) -> None:
         tmp = self[index1]
         self[index1] = self[index2]
         self[index2] = tmp
-
-    def __iter__(self) -> Iterator[T]:
-        for index in range(self.size):
-            yield self[index]

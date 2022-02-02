@@ -1,4 +1,4 @@
-from typing import TypeVar, Union, List, cast, Iterable
+from typing import TypeVar, Union, List, cast, Iterable, Optional, Iterator
 
 from algorithms.alg01deque.deque import Deque
 
@@ -13,7 +13,7 @@ EMPTY = Empty()
 
 
 class ArrayDeque(Deque[T]):
-    def __init__(self, iterable: Iterable[T] = None, capacity: int = 32):
+    def __init__(self, iterable: Optional[Iterable[T]] = None, capacity: int = 32):
         super().__init__()
         self._array: List[Union[Empty, T]] = [EMPTY] * capacity
         self._head_item_index: int = 0
@@ -90,10 +90,6 @@ class ArrayDeque(Deque[T]):
                 self[remap_index] = self[remap_index - 1]
             self[index] = item
 
-    def _assert_not_empty(self) -> None:
-        if self.is_empty:
-            raise AssertionError("dequeue is empty: cannot remove elements from it")
-
     def pop_head(self) -> T:
         self._assert_not_empty()
         item: T = self[0]
@@ -123,3 +119,7 @@ class ArrayDeque(Deque[T]):
             for swap_index in range(index, self.size - 1):
                 self.swap(swap_index, swap_index + 1)
             return self.pop_tail()
+
+    def __iter__(self) -> Iterator[T]:
+        for index in range(self.size):
+            yield self[index]
