@@ -10,6 +10,13 @@ pub use deque_vec_adapter::DequeueVecAdapter;
 mod tests {
     use super::*;
 
+    fn deque_constructors<T>() -> Vec<Box<fn() -> dyn Deque<T>>> {
+        let mut v = Vec::<Box<fn() -> dyn Deque<T>>>::new();
+        v.push(Box::new(|| DequeueVecAdapter::new()));
+        v.push(Box::new(|| ArrayDeque::new()));
+        v
+    }
+
     fn all_deques<T: 'static>() -> Vec<Box<dyn Deque<T>>> {
         let mut v: Vec<Box<dyn Deque<T>>> = Vec::new();
         v.push(Box::new(DequeueVecAdapter::new()));
@@ -26,4 +33,26 @@ mod tests {
             assert_eq!([1, 2, 3], deque.as_slice())
         }
     }
+
+    // struct Droppable<'a> {
+    //     is_dropped: &'a bool,
+    // }
+    //
+    // impl<'a> Drop for Droppable<'a> {
+    //     fn drop(&mut self) {
+    //         self.is_dropped = &true
+    //     }
+    // }
+    //
+    // #[test]
+    // fn test_single_item_dropped_correctly() {
+    //     for deque in all_deques::<Droppable>().iter_mut() {
+    //         let drop_flag = false;
+    //         let drop_flag_ref = &drop_flag;
+    //         {
+    //             let deque = deque;
+    //             deque.add_last(Droppable{is_dropped: drop_flag_ref});
+    //         }
+    //     }
+    // }
 }
