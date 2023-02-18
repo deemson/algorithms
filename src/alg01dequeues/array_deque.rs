@@ -20,6 +20,10 @@ impl<T> ArrayDeque<T> {
     fn item_size(&self) -> usize {
         std::mem::size_of::<T>()
     }
+
+    fn item_align(&self) -> usize {
+        std::mem::align_of::<T>()
+    }
 }
 
 impl<T> Deque<T> for ArrayDeque<T> {
@@ -40,7 +44,7 @@ impl<T> Deque<T> for ArrayDeque<T> {
             self.length += 1;
         } else {
             let new_capacity = self.capacity.checked_mul(2).expect("capacity wrapped around usize");
-            let align = std::mem::align_of::<T>();
+            let align = self.item_align();
             let size = self.item_size() * self.capacity;
             size.checked_add(size % align).expect("can't allocate");
             let pointer = unsafe {
@@ -59,5 +63,20 @@ impl<T> Deque<T> for ArrayDeque<T> {
 
     fn as_slice(&self) -> &[T] {
         unsafe { std::slice::from_raw_parts(self.pointer.as_ptr(), self.length) }
+    }
+}
+
+impl<T> Drop for ArrayDeque<T> {
+    fn drop(&mut self) {
+        let pointer = self.pointer.as_ptr();
+        unsafe {
+            let raw_slice_pointer = std::slice::from_raw_parts_mut(pointer, self.length);
+            let layout = alloc::Layout::from_size_align_unchecked(
+                self.item_size() * self.capacity,
+                self.item_align(),
+            );
+            std::ptr::drop_in_place(raw_slice_pointer);
+            alloc::dealloc(pointer as *mut u8, layout);
+        }
     }
 }

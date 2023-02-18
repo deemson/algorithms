@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+cargo build --example alg01_array_deque_grow
+valgrind --leak-check=full ./target/debug/examples/alg01_array_deque_grow

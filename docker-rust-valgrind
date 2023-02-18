@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+docker build --tag algorithms-valgrind .
+docker run --interactive --tty --rm algorithms-valgrind
+docker rmi algorithms-valgrind
