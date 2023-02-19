@@ -68,6 +68,9 @@ impl<T> Deque<T> for ArrayDeque<T> {
 
 impl<T> Drop for ArrayDeque<T> {
     fn drop(&mut self) {
+        if self.capacity == 0 {
+            return
+        }
         let pointer = self.pointer.as_ptr();
         unsafe {
             let raw_slice_pointer = std::slice::from_raw_parts_mut(pointer, self.length);

@@ -1,18 +1,18 @@
 use super::deque::Deque;
 
-pub struct DequeueVecAdapter<T> {
+pub struct DequeVecAdapter<T> {
     vec: Vec<T>,
 }
 
-impl<T> DequeueVecAdapter<T> {
+impl<T> DequeVecAdapter<T> {
     pub fn new() -> Self {
-        DequeueVecAdapter {
+        DequeVecAdapter {
             vec: Vec::new()
         }
     }
 }
 
-impl<T> Deque<T> for DequeueVecAdapter<T> {
+impl<T> Deque<T> for DequeVecAdapter<T> {
     fn add_last(&mut self, item: T) {
         self.vec.push(item)
     }
