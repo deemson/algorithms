@@ -2,6 +2,9 @@ use std::alloc;
 use std::ptr::NonNull;
 use super::deque::Deque;
 
+/// `ArrayDeque<T>` uses chunks of contiguous manually allocated memory for `Deque<T>`
+/// implementation. They are treated as a substitution for arrays and serve a similar purpose.
+/// `ArrayDeque<T>` re-allocates memory as necessary, imitating array grow and shrink functionality.
 pub struct ArrayDeque<T> {
     pointer: NonNull<T>,
     capacity: usize,

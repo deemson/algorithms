@@ -1,5 +1,7 @@
 use super::deque::Deque;
 
+/// `Deque<T>` that uses `Vec<T>`.
+/// Used as a reference implementations.
 pub struct DequeVecAdapter<T> {
     vec: Vec<T>,
 }

@@ -6,6 +6,8 @@ pub use deque::Deque;
 pub use array_deque::ArrayDeque;
 pub use deque_vec_adapter::DequeVecAdapter;
 
+/// A simple struct that implements `Drop` to be used
+/// in deque tests to detect that items are dropped correctly
 struct DropDetector<'a> {
     is_dropped: &'a mut bool,
 }
@@ -16,6 +18,7 @@ impl<'a> Drop for DropDetector<'a> {
     }
 }
 
+/// Using macro to create common test suite for multiple `Deque` implementations
 macro_rules! deque_tests {
     ($($name:ident: $deque_type:ident,)*) => {
         $(
@@ -31,12 +34,14 @@ macro_rules! deque_tests {
                     assert_eq!([1, 2, 3], deque.as_slice())
                 }
 
+                /// Empty deque should drop correctly
                 #[test]
                 fn empty_drops_ok() {
                     let deque = $deque_type::<()>::new();
                     drop(deque);
                 }
 
+                /// Passing `DropDetector` to check if a single item in `Deque` drops correctly
                 #[test]
                 fn single_item_drops_ok() {
                     let mut is_dropped = false;
@@ -46,6 +51,7 @@ macro_rules! deque_tests {
                     assert!(is_dropped);
                 }
 
+                /// Same as above only for multiple items
                 #[test]
                 fn multiple_items_drop_ok() {
                     let mut drop_flags = vec![false, false, false];
