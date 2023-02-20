@@ -11,6 +11,8 @@ pub struct ArrayDeque<T> {
     non_null_ptr: NonNull<T>,
     capacity: usize,
     len: usize,
+    first_item_idx: usize,
+    last_item_idx: usize,
 }
 
 impl<T> ArrayDeque<T> {
@@ -19,6 +21,8 @@ impl<T> ArrayDeque<T> {
             non_null_ptr: NonNull::dangling(),
             capacity: 0,
             len: 0,
+            first_item_idx: 0,
+            last_item_idx: 0,
         }
     }
 
@@ -67,7 +71,11 @@ impl<T> Deque<T> for ArrayDeque<T> {
     fn add_last(&mut self, item: T) {
         assert_ne!(self.item_size(), 0, "ArrayDeque cannot allocate memory for zero-sized items");
         self.grow_if_required();
-        unsafe { self.non_null_ptr.as_ptr().add(self.len).write(item) };
+        unsafe { self.non_null_ptr.as_ptr().add(self.last_item_idx).write(item) };
+        self.last_item_idx += 1;
+        if self.last_item_idx == self.capacity {
+            self.last_item_idx = 0;
+        }
         self.len += 1;
     }
 
