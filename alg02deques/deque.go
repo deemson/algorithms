@@ -7,8 +7,10 @@ type Deque[T any] interface {
 	Get(index int) T
 	AddFirst(item T)
 	AddLast(item T)
+	AddAtIndex(index int, item T)
 	RemoveFirst() T
 	RemoveLast() T
+	RemoveAtIndex(index int) T
 }
 
 func isEmpty[T any](deque Deque[T]) bool {

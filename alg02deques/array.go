@@ -81,6 +81,54 @@ func (d *ArrayDeque[T]) AddLast(item T) {
 	d.size++
 }
 
+func (d *ArrayDeque[T]) AddAtIndex(index int, item T) {
+	// this.growIfRequired()
+	//        when (index) {
+	//            0 -> addFirst(item)
+	//            this._size -> addLast(item)
+	//            else -> {
+	//                this.assertIndex(index)
+	//                this.lastItemIndex++
+	//                if (this.lastItemIndex == this.capacity) {
+	//                    this.lastItemIndex = 0
+	//                }
+	//                this._size++
+	//                for (remapIndex in this._size - 1 downTo index + 1) {
+	//                    this[remapIndex] = this[remapIndex - 1]
+	//                }
+	//                this[index] = item
+	//            }
+	//        }
+	d.growIfRequired()
+	switch index {
+	case 0:
+		d.AddFirst(item)
+	case d.size:
+		d.AddLast(item)
+	default:
+		d.ensureIndexInBounds(index)
+		// figure out if we need to move fewer items at the start or at the end
+		if d.size-1-index < index+1 {
+			// fewer items to move at the end
+			d.lastItemIndex++
+			if d.lastItemIndex == d.capacity() {
+				d.lastItemIndex = 0
+			}
+			
+		} else {
+			// fewer items to move at the start
+		}
+
+		d.size++
+
+	}
+}
+
+func (d *ArrayDeque[T]) RemoveAtIndex(index int) T {
+	var t T
+	return t
+}
+
 func (d *ArrayDeque[T]) RemoveFirst() T {
 	item := d.Get(0)
 	d.firstItemIndex++
