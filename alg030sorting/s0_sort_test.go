@@ -1,20 +1,20 @@
-package alg031sorting_test
+package alg030sorting_test
 
 import (
 	"github.com/deemson/algorithms/alg020indexed"
-	"github.com/deemson/algorithms/alg031sorting"
+	"github.com/deemson/algorithms/alg030sorting"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
-func forEachAlgorithm[T any](t *testing.T, less alg031sorting.LessFunc[T], f func(t *testing.T, sort func(indexed alg020indexed.Indexed[T]))) {
-	sorts := map[string]alg031sorting.SortFunc[T]{
-		"SelectionSort":     alg031sorting.SelectionSort[T],
-		"InsertionSort":     alg031sorting.InsertionSort[T],
-		"ShellSort":         alg031sorting.ShellSort[T],
-		"MergeSort":         alg031sorting.MergeSort[T],
-		"BottomUpMergeSort": alg031sorting.BottomUpMergeSort[T],
-		"QuickSort":         alg031sorting.QuickSort[T],
+func forEachAlgorithm[T any](t *testing.T, less alg030sorting.LessFunc[T], f func(t *testing.T, sort func(indexed alg020indexed.Indexed[T]))) {
+	sorts := map[string]alg030sorting.SortFunc[T]{
+		"SelectionSort":     alg030sorting.SelectionSort[T],
+		"InsertionSort":     alg030sorting.InsertionSort[T],
+		"ShellSort":         alg030sorting.ShellSort[T],
+		"MergeSort":         alg030sorting.MergeSort[T],
+		"BottomUpMergeSort": alg030sorting.BottomUpMergeSort[T],
+		"QuickSort":         alg030sorting.QuickSort[T],
 	}
 	for name, sort := range sorts {
 		t.Run(name, func(t *testing.T) {

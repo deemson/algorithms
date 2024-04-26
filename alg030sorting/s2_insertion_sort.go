@@ -1,4 +1,4 @@
-package alg031sorting
+package alg030sorting
 
 import "github.com/deemson/algorithms/alg020indexed"
 
