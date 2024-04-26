@@ -8,8 +8,8 @@ import (
 
 func forEachAlgorithm[T any](t *testing.T, f func(t *testing.T, stack alg023stack.Stack[T])) {
 	stacks := map[string]alg023stack.Stack[T]{
-		"array":  alg023stack.Array[T](2),
-		"linked": alg023stack.Linked[T](),
+		"ArrayStack":  alg023stack.Array[T](2),
+		"LinkedStack": alg023stack.Linked[T](),
 	}
 	for name, stack := range stacks {
 		t.Run(name, func(t *testing.T) {

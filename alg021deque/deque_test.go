@@ -8,8 +8,8 @@ import (
 
 func forEachAlgorithm[T any](t *testing.T, f func(t *testing.T, deque alg021deque.Deque[T])) {
 	deques := map[string]alg021deque.Deque[T]{
-		"array":  alg021deque.Array[T](2),
-		"linked": alg021deque.Linked[T](),
+		"ArrayDeque":  alg021deque.Array[T](2),
+		"LinkedDeque": alg021deque.Linked[T](),
 	}
 	for name, deque := range deques {
 		t.Run(name, func(t *testing.T) {

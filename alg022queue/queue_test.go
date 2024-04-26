@@ -8,8 +8,8 @@ import (
 
 func forEachAlgorithm[T any](t *testing.T, f func(t *testing.T, queue alg022queue.Queue[T])) {
 	queues := map[string]alg022queue.Queue[T]{
-		"array":  alg022queue.Array[T](2),
-		"linked": alg022queue.Linked[T](),
+		"ArrayQueue":  alg022queue.Array[T](2),
+		"LinkedQueue": alg022queue.Linked[T](),
 	}
 	for name, queue := range queues {
 		t.Run(name, func(t *testing.T) {

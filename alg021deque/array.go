@@ -1,5 +1,7 @@
 package alg021deque
 
+import "github.com/deemson/algorithms/alg020indexed"
+
 func Array[T any](capacity int) Deque[T] {
 	return Deque[T]{
 		algorithm: &ArrayAlgorithm[T]{
@@ -75,7 +77,7 @@ func (a *ArrayAlgorithm[T]) RemoveAtIndex(index int) T {
 	if 2*index < a.size-1 {
 		// fewer items to move at the start
 		for swapIndex := index; swapIndex > 0; swapIndex-- {
-			swap[T](a, swapIndex, swapIndex-1)
+			alg020indexed.Swap[T](a, swapIndex, swapIndex-1)
 		}
 		item = a.Get(0)
 		a.array[a.normalizeIndex(0)] = nil
@@ -86,7 +88,7 @@ func (a *ArrayAlgorithm[T]) RemoveAtIndex(index int) T {
 	} else {
 		// fewer items to move at the end
 		for swapIndex := index; swapIndex < a.size-1; swapIndex++ {
-			swap[T](a, swapIndex, swapIndex+1)
+			alg020indexed.Swap[T](a, swapIndex, swapIndex+1)
 		}
 		item = a.Get(a.size - 1)
 		a.array[a.normalizeIndex(a.size-1)] = nil

@@ -23,6 +23,13 @@ func (d Deque[T]) Get(index int) T {
 	return d.algorithm.Get(index)
 }
 
+func (d Deque[T]) Range(fromIndex, toIndex int) []T {
+	ensureIndexLessThanSize(fromIndex, d.Size())
+	ensureIndexLessThanSize(toIndex, d.Size())
+	ensureFromLessTo(fromIndex, toIndex)
+	return d.algorithm.Range(fromIndex, toIndex)
+}
+
 func (d Deque[T]) Set(index int, item T) {
 	ensureIndexLessThanSize(index, d.Size())
 	d.algorithm.Set(index, item)
@@ -84,5 +91,11 @@ func ensureIndexLessOrEqualSize(index int, size int) {
 func ensureNotEmpty(size int) {
 	if size == 0 {
 		panic("Deque must not be empty")
+	}
+}
+
+func ensureFromLessTo(fromIndex, toIndex int) {
+	if fromIndex > toIndex {
+		panic(fmt.Sprintf("Deque from range index (%d) must be less or equal to range index (%d)", fromIndex, toIndex))
 	}
 }
