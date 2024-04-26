@@ -8,7 +8,8 @@ import (
 
 func forEachAlgorithm[T any](t *testing.T, f func(t *testing.T, deque alg02deque.Deque[T])) {
 	deques := map[string]alg02deque.Deque[T]{
-		"array": alg02deque.ArrayBased[T](2),
+		"array":  alg02deque.Array[T](2),
+		"linked": alg02deque.Linked[T](),
 	}
 	for name, deque := range deques {
 		t.Run(name, func(t *testing.T) {
@@ -51,5 +52,25 @@ func TestDeque_AddAtIndexInBounds(t *testing.T) {
 	forEachAlgorithm[int](t, func(t *testing.T, deque alg02deque.Deque[int]) {
 		deque.AddAtIndex(0, 42)
 		assert.Equal(t, 42, deque.Get(0))
+	})
+}
+
+func TestDeque_GetNegativeIndex(t *testing.T) {
+	forEachAlgorithm[int](t, func(t *testing.T, deque alg02deque.Deque[int]) {
+		defer func(t *testing.T) {
+			r := recover()
+			assert.Equal(t, "Deque index must not be negative (-1)", r)
+		}(t)
+		deque.Get(-1)
+	})
+}
+
+func TestDeque_RemoveFromEmpty(t *testing.T) {
+	forEachAlgorithm[int](t, func(t *testing.T, deque alg02deque.Deque[int]) {
+		defer func(t *testing.T) {
+			r := recover()
+			assert.Equal(t, "Deque must not be empty", r)
+		}(t)
+		deque.RemoveLast()
 	})
 }

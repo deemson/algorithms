@@ -7,7 +7,7 @@ import (
 )
 
 func TestArrayDeque_GrowByAddingLast(t *testing.T) {
-	deque := alg02deque.ArrayBased[int](2)
+	deque := alg02deque.Array[int](2)
 	deque.AddLast(1)
 	deque.AddLast(2)
 	deque.AddLast(3)
@@ -16,7 +16,7 @@ func TestArrayDeque_GrowByAddingLast(t *testing.T) {
 }
 
 func TestArrayDeque_GrowByAddingFirst(t *testing.T) {
-	deque := alg02deque.ArrayBased[int](2)
+	deque := alg02deque.Array[int](2)
 	deque.AddFirst(1)
 	deque.AddFirst(2)
 	deque.AddFirst(3)
@@ -25,7 +25,7 @@ func TestArrayDeque_GrowByAddingFirst(t *testing.T) {
 }
 
 func TestArrayDeque_ShrinkByAddingLastAndRemovingFirst(t *testing.T) {
-	deque := alg02deque.ArrayBased[int](4)
+	deque := alg02deque.Array[int](4)
 	deque.AddLast(1)
 	deque.AddLast(2)
 	deque.AddLast(3)
@@ -38,7 +38,7 @@ func TestArrayDeque_ShrinkByAddingLastAndRemovingFirst(t *testing.T) {
 }
 
 func TestArrayDeque_ShrinkByAddingFirstAndRemovingLast(t *testing.T) {
-	deque := alg02deque.ArrayBased[int](4)
+	deque := alg02deque.Array[int](4)
 	deque.AddFirst(1)
 	deque.AddFirst(2)
 	deque.AddFirst(3)
@@ -52,7 +52,7 @@ func TestArrayDeque_ShrinkByAddingFirstAndRemovingLast(t *testing.T) {
 }
 
 func TestArrayDeque_AddAtIndex_MovingItemsToBothEnds(t *testing.T) {
-	deque := alg02deque.ArrayBased[int](2)
+	deque := alg02deque.Array[int](2)
 	deque.AddLast(1)
 	deque.AddLast(3)
 	deque.AddLast(5)
@@ -63,7 +63,7 @@ func TestArrayDeque_AddAtIndex_MovingItemsToBothEnds(t *testing.T) {
 }
 
 func TestArrayDeque_RemoveAtIndex_MovingItemsToBothEnds(t *testing.T) {
-	deque := alg02deque.ArrayBased[int](2)
+	deque := alg02deque.Array[int](2)
 	deque.AddLast(1)
 	deque.AddLast(2)
 	deque.AddLast(3)
@@ -76,7 +76,7 @@ func TestArrayDeque_RemoveAtIndex_MovingItemsToBothEnds(t *testing.T) {
 }
 
 func TestArrayDeque_RemoveAtIndex_FirstItemIndexWrapAround(t *testing.T) {
-	deque := alg02deque.ArrayBased[int](4)
+	deque := alg02deque.Array[int](4)
 	deque.AddLast(2)
 	deque.AddFirst(1)
 	assert.Equal(t, []int{1, 2}, deque.ToSlice())

@@ -7,11 +7,7 @@ type Deque[T any] struct {
 }
 
 func (d Deque[T]) ToSlice() []T {
-	slice := make([]T, d.Size())
-	for index := 0; index < d.Size(); index++ {
-		slice[index] = d.algorithm.Get(index)
-	}
-	return slice
+	return d.algorithm.Range(0, d.Size())
 }
 
 func (d Deque[T]) Size() int {
@@ -45,6 +41,12 @@ func (d Deque[T]) AddLast(item T) {
 	d.AddAtIndex(d.Size(), item)
 }
 
+func (d Deque[T]) AddAllLast(items ...T) {
+	for _, item := range items {
+		d.AddLast(item)
+	}
+}
+
 func (d Deque[T]) RemoveAtIndex(index int) T {
 	ensureNotEmpty(d.Size())
 	ensureIndexLessThanSize(index, d.Size())
@@ -61,7 +63,7 @@ func (d Deque[T]) RemoveLast() T {
 
 func ensureIndexNotNegative(index int) {
 	if index < 0 {
-		panic(fmt.Sprintf("Deque index cannot be negative (%d)", index))
+		panic(fmt.Sprintf("Deque index must not be negative (%d)", index))
 	}
 }
 
