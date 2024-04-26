@@ -1,0 +1,14 @@
+package alg02indexed
+
+type Indexed[T any] interface {
+	Size() int
+	Get(index int) T
+	Range(fromIndex, toIndex int) []T
+	Set(index int, item T)
+}
+
+func Swap[T any](indexed Indexed[T], index1, index2 int) {
+	tmp := indexed.Get(index1)
+	indexed.Set(index1, indexed.Get(index2))
+	indexed.Set(index2, tmp)
+}
