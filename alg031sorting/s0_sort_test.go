@@ -9,10 +9,12 @@ import (
 
 func forEachAlgorithm[T any](t *testing.T, less alg031sorting.LessFunc[T], f func(t *testing.T, sort func(indexed alg020indexed.Indexed[T]))) {
 	sorts := map[string]alg031sorting.SortFunc[T]{
-		"SelectionSort": alg031sorting.SelectionSort[T],
-		"InsertionSort": alg031sorting.InsertionSort[T],
-		"ShellSort":     alg031sorting.ShellSort[T],
-		"MergeSort":     alg031sorting.MergeSort[T],
+		"SelectionSort":     alg031sorting.SelectionSort[T],
+		"InsertionSort":     alg031sorting.InsertionSort[T],
+		"ShellSort":         alg031sorting.ShellSort[T],
+		"MergeSort":         alg031sorting.MergeSort[T],
+		"BottomUpMergeSort": alg031sorting.BottomUpMergeSort[T],
+		"QuickSort":         alg031sorting.QuickSort[T],
 	}
 	for name, sort := range sorts {
 		t.Run(name, func(t *testing.T) {
