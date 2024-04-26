@@ -2,7 +2,7 @@ package alg02deque
 
 func ArrayBased[T any](capacity int) Deque[T] {
 	return Deque[T]{
-		Algorithm: &ArrayAlgorithm[T]{
+		algorithm: &ArrayAlgorithm[T]{
 			array:          makeArray(capacity),
 			firstItemIndex: 0,
 			lastItemIndex:  0,
@@ -28,12 +28,10 @@ func (a *ArrayAlgorithm[T]) Size() int {
 }
 
 func (a *ArrayAlgorithm[T]) Get(index int) T {
-	ensureIndexInBounds(index, a.size)
 	return a.array[a.normalizeIndex(index)].(T)
 }
 
 func (a *ArrayAlgorithm[T]) Set(index int, item T) {
-	ensureIndexInBounds(index, a.size)
 	a.array[a.normalizeIndex(index)] = item
 }
 
@@ -46,7 +44,7 @@ func (a *ArrayAlgorithm[T]) AddAtIndex(index int, item T) {
 		if a.lastItemIndex == a.capacity() {
 			a.lastItemIndex = 0
 		}
-		for shiftIndex := a.size - 1; shiftIndex > index+1; shiftIndex-- {
+		for shiftIndex := a.size; shiftIndex > index; shiftIndex-- {
 			a.Set(shiftIndex, a.Get(shiftIndex-1))
 		}
 	} else {
@@ -59,12 +57,39 @@ func (a *ArrayAlgorithm[T]) AddAtIndex(index int, item T) {
 			a.Set(shiftIndex, a.Get(shiftIndex+1))
 		}
 	}
-	a.size++
 	a.Set(index, item)
+	a.size++
 }
 
 func (a *ArrayAlgorithm[T]) RemoveAtIndex(index int) T {
-	panic("not implemented")
+	var item T
+	// move item at index to first or last position -- whichever requires fewer swaps and remove it
+	if a.size-1-index <= index {
+		// fewer items to move at the end
+		for swapIndex := index; swapIndex < a.size-1; swapIndex++ {
+			swap[T](a, swapIndex, swapIndex+1)
+		}
+		item = a.Get(a.size - 1)
+		a.array[a.normalizeIndex(a.size-1)] = nil
+		a.lastItemIndex--
+		if a.lastItemIndex < 0 {
+			a.lastItemIndex = a.capacity() - 1
+		}
+	} else {
+		// fewer items to move at the start
+		for swapIndex := index; swapIndex > 0; swapIndex-- {
+			swap[T](a, swapIndex, swapIndex-1)
+		}
+		item = a.Get(0)
+		a.array[a.normalizeIndex(0)] = nil
+		a.firstItemIndex++
+		if a.firstItemIndex == a.capacity() {
+			a.firstItemIndex = 0
+		}
+	}
+	a.size--
+	a.shrinkIfRequired()
+	return item
 }
 
 // normalizeIndex makes sure that index that comes from the outer code which
