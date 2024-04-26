@@ -1,4 +1,4 @@
-package alg02deque
+package alg021deque
 
 func Linked[T any]() Deque[T] {
 	return Deque[T]{

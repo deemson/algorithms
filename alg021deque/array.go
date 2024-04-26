@@ -1,4 +1,4 @@
-package alg02deque
+package alg021deque
 
 func Array[T any](capacity int) Deque[T] {
 	return Deque[T]{

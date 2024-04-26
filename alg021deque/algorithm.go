@@ -1,4 +1,4 @@
-package alg02deque
+package alg021deque
 
 type Algorithm[T any] interface {
 	Size() int
