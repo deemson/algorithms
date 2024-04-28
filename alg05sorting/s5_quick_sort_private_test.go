@@ -2,6 +2,7 @@ package alg05sorting
 
 import (
 	"github.com/deemson/algorithms/alg00indexed"
+	"github.com/deemson/algorithms/alg00less"
 	"github.com/stretchr/testify/assert"
 	"sort"
 	"testing"
@@ -36,11 +37,11 @@ func TestPartition(t *testing.T) {
 	}
 	for name, testCase := range testCases {
 		t.Run(name, func(t *testing.T) {
-			actualIndex := partition(alg00indexed.SliceAdapter[int]{
-				Slice: testCase.actual,
-			}, func(item1, item2 int) bool {
-				return item1 < item2
-			}, 0, len(testCase.actual)-1)
+			actualIndex := partition(
+				alg00indexed.Slice(testCase.actual),
+				alg00less.Int,
+				0, len(testCase.actual)-1,
+			)
 			assert.Equal(t, testCase.expected, testCase.actual)
 			assert.Equal(t, testCase.expectedIndex, actualIndex)
 		})
@@ -49,9 +50,7 @@ func TestPartition(t *testing.T) {
 
 func TestShuffle(t *testing.T) {
 	slice := []int{1, 2, 3, 4, 5}
-	shuffle[int](alg00indexed.SliceAdapter[int]{
-		Slice: slice,
-	})
+	shuffle[int](alg00indexed.Slice(slice))
 	assert.NotEqual(t, []int{1, 2, 3, 4, 5}, slice)
 	sort.Slice(slice, func(i, j int) bool {
 		return slice[i] < slice[j]

@@ -8,9 +8,7 @@ import (
 
 func TestSliceAdapter_Swap(t *testing.T) {
 	slice := []int{1, 2}
-	adapter := alg00indexed.SliceAdapter[int]{
-		Slice: slice,
-	}
+	adapter := alg00indexed.Slice(slice)
 	alg00indexed.Swap[int](adapter, 0, 1)
 	assert.Equal(t, []int{2, 1}, slice)
 }

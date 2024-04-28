@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-func forEachAlgorithm[T any](t *testing.T, less alg00less.Func[T], f func(t *testing.T, sort func(indexed alg00indexed.Indexed[T]))) {
+func forEachAlgorithm[T any](t *testing.T, less alg00less.Less[T], f func(t *testing.T, sort func(indexed alg00indexed.Indexed[T]))) {
 	sorts := map[string]alg05sorting.SortFunc[T]{
 		"SelectionSort":     alg05sorting.SelectionSort[T],
 		"InsertionSort":     alg05sorting.InsertionSort[T],
@@ -27,9 +27,7 @@ func forEachAlgorithm[T any](t *testing.T, less alg00less.Func[T], f func(t *tes
 }
 
 func TestSort_BunchOfInts(t *testing.T) {
-	forEachAlgorithm(t, func(item1, item2 int) bool {
-		return item1 < item2
-	}, func(t *testing.T, sort func(indexed alg00indexed.Indexed[int])) {
+	forEachAlgorithm(t, alg00less.Int, func(t *testing.T, sort func(indexed alg00indexed.Indexed[int])) {
 		actual := []int{
 			42,
 			17,
@@ -52,22 +50,16 @@ func TestSort_BunchOfInts(t *testing.T) {
 			4242,
 			100500,
 		}
-		sort(alg00indexed.SliceAdapter[int]{
-			Slice: actual,
-		})
+		sort(alg00indexed.Slice(actual))
 		assert.Equal(t, expected, actual)
 	})
 }
 
 func TestSort_BunchOfStrings(t *testing.T) {
-	forEachAlgorithm(t, func(item1, item2 string) bool {
-		return item1 < item2
-	}, func(t *testing.T, sort func(indexed alg00indexed.Indexed[string])) {
+	forEachAlgorithm(t, alg00less.String, func(t *testing.T, sort func(indexed alg00indexed.Indexed[string])) {
 		actual := []string{"super", "algorithm", "main"}
 		expected := []string{"algorithm", "main", "super"}
-		sort(alg00indexed.SliceAdapter[string]{
-			Slice: actual,
-		})
+		sort(alg00indexed.Slice(actual))
 		assert.Equal(t, expected, actual)
 	})
 }

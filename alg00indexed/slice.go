@@ -1,5 +1,11 @@
 package alg00indexed
 
+func Slice[T any](slice []T) SliceAdapter[T] {
+	return SliceAdapter[T]{
+		Slice: slice,
+	}
+}
+
 type SliceAdapter[T any] struct {
 	Slice []T
 }

@@ -8,18 +8,14 @@ import (
 // MergeSort is a divide and conquer (split-sort-merge) algorithm.
 // The execution time is as fast as O(N*log2(N)).
 // Traditional implementation via recursion.
-func MergeSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Func[T]) {
-	aux := alg00indexed.SliceAdapter[T]{
-		Slice: make([]T, indexed.Size()),
-	}
+func MergeSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T]) {
+	aux := alg00indexed.Slice(make([]T, indexed.Size()))
 	mergeSort(indexed, aux, less, 0, indexed.Size()-1)
 }
 
 // BottomUpMergeSort implements the same merge sort only without recursion
-func BottomUpMergeSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Func[T]) {
-	aux := alg00indexed.SliceAdapter[T]{
-		Slice: make([]T, indexed.Size()),
-	}
+func BottomUpMergeSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T]) {
+	aux := alg00indexed.Slice(make([]T, indexed.Size()))
 	// partitionSize size grows as 1 2 4 8 ...
 	partitionSize := 1
 	for partitionSize < indexed.Size() {
@@ -32,7 +28,7 @@ func BottomUpMergeSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Fu
 	}
 }
 
-func mergeSort[T any](indexed, aux alg00indexed.Indexed[T], less alg00less.Func[T], lo, hi int) {
+func mergeSort[T any](indexed, aux alg00indexed.Indexed[T], less alg00less.Less[T], lo, hi int) {
 	// If the thresholds overlap the sorting is done.
 	if lo >= hi {
 		return
@@ -50,7 +46,7 @@ func mergeSort[T any](indexed, aux alg00indexed.Indexed[T], less alg00less.Func[
 // merge merges two parts of the indexed array together via temporary aux storage array.
 // It assumes that both halves of the array are sorted individually and they need to be merged
 // together so that the result is sorted as well.
-func merge[T any](indexed, aux alg00indexed.Indexed[T], less alg00less.Func[T], lo, mid, hi int) {
+func merge[T any](indexed, aux alg00indexed.Indexed[T], less alg00less.Less[T], lo, mid, hi int) {
 	for index := lo; index <= hi; index++ {
 		aux.Set(index, indexed.Get(index))
 	}

@@ -1,3 +1,11 @@
 package alg00less
 
-type Func[T any] func(item1, item2 T) bool
+type Less[T any] func(item1, item2 T) bool
+
+func Int(item1, item2 int) bool {
+	return item1 < item2
+}
+
+func String(item1, item2 string) bool {
+	return item1 < item2
+}

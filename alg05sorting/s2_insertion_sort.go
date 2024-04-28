@@ -7,7 +7,7 @@ import (
 
 // InsertionSort does on average ~1/4N^2 compares and ~1/4N^2 swaps.
 // With partially sorted arrays, though, it's performance can be close to linear.
-func InsertionSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Func[T]) {
+func InsertionSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T]) {
 	for outerLoopIndex := 1; outerLoopIndex < indexed.Size(); outerLoopIndex++ {
 		// Every added item tries to find its place in the left part (sorted part) of the entire array.
 		for innerLoopIndex := outerLoopIndex; innerLoopIndex > 0; innerLoopIndex-- {
