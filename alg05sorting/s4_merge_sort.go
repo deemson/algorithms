@@ -1,11 +1,14 @@
 package alg05sorting
 
-import "github.com/deemson/algorithms/alg00indexed"
+import (
+	"github.com/deemson/algorithms/alg00indexed"
+	"github.com/deemson/algorithms/alg00less"
+)
 
 // MergeSort is a divide and conquer (split-sort-merge) algorithm.
 // The execution time is as fast as O(N*log2(N)).
 // Traditional implementation via recursion.
-func MergeSort[T any](indexed alg00indexed.Indexed[T], less LessFunc[T]) {
+func MergeSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Func[T]) {
 	aux := alg00indexed.SliceAdapter[T]{
 		Slice: make([]T, indexed.Size()),
 	}
@@ -13,7 +16,7 @@ func MergeSort[T any](indexed alg00indexed.Indexed[T], less LessFunc[T]) {
 }
 
 // BottomUpMergeSort implements the same merge sort only without recursion
-func BottomUpMergeSort[T any](indexed alg00indexed.Indexed[T], less LessFunc[T]) {
+func BottomUpMergeSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Func[T]) {
 	aux := alg00indexed.SliceAdapter[T]{
 		Slice: make([]T, indexed.Size()),
 	}
@@ -29,7 +32,7 @@ func BottomUpMergeSort[T any](indexed alg00indexed.Indexed[T], less LessFunc[T])
 	}
 }
 
-func mergeSort[T any](indexed, aux alg00indexed.Indexed[T], less LessFunc[T], lo, hi int) {
+func mergeSort[T any](indexed, aux alg00indexed.Indexed[T], less alg00less.Func[T], lo, hi int) {
 	// If the thresholds overlap the sorting is done.
 	if lo >= hi {
 		return
@@ -47,7 +50,7 @@ func mergeSort[T any](indexed, aux alg00indexed.Indexed[T], less LessFunc[T], lo
 // merge merges two parts of the indexed array together via temporary aux storage array.
 // It assumes that both halves of the array are sorted individually and they need to be merged
 // together so that the result is sorted as well.
-func merge[T any](indexed, aux alg00indexed.Indexed[T], less LessFunc[T], lo, mid, hi int) {
+func merge[T any](indexed, aux alg00indexed.Indexed[T], less alg00less.Func[T], lo, mid, hi int) {
 	for index := lo; index <= hi; index++ {
 		aux.Set(index, indexed.Get(index))
 	}

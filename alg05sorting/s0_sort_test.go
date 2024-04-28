@@ -2,12 +2,13 @@ package alg05sorting_test
 
 import (
 	"github.com/deemson/algorithms/alg00indexed"
+	"github.com/deemson/algorithms/alg00less"
 	"github.com/deemson/algorithms/alg05sorting"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
-func forEachAlgorithm[T any](t *testing.T, less alg05sorting.LessFunc[T], f func(t *testing.T, sort func(indexed alg00indexed.Indexed[T]))) {
+func forEachAlgorithm[T any](t *testing.T, less alg00less.Func[T], f func(t *testing.T, sort func(indexed alg00indexed.Indexed[T]))) {
 	sorts := map[string]alg05sorting.SortFunc[T]{
 		"SelectionSort":     alg05sorting.SelectionSort[T],
 		"InsertionSort":     alg05sorting.InsertionSort[T],

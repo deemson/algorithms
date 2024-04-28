@@ -1,9 +1,12 @@
 package alg05sorting
 
-import "github.com/deemson/algorithms/alg00indexed"
+import (
+	"github.com/deemson/algorithms/alg00indexed"
+	"github.com/deemson/algorithms/alg00less"
+)
 
 // SelectionSort does ~N^2/2 compares and N swaps
-func SelectionSort[T any](indexed alg00indexed.Indexed[T], less LessFunc[T]) {
+func SelectionSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Func[T]) {
 	// Outer loop that iterates through all the items with the intention to swap at the end.
 	for outerLoopIndex := 0; outerLoopIndex < indexed.Size(); outerLoopIndex++ {
 		// Each iteration of the outer loop it tries to find the minimum item index to the right

@@ -1,7 +1,8 @@
 package alg05sorting
 
-import "github.com/deemson/algorithms/alg00indexed"
+import (
+	"github.com/deemson/algorithms/alg00indexed"
+	"github.com/deemson/algorithms/alg00less"
+)
 
-type LessFunc[T any] func(item1, item2 T) bool
-
-type SortFunc[T any] func(indexed alg00indexed.Indexed[T], less LessFunc[T])
+type SortFunc[T any] func(indexed alg00indexed.Indexed[T], less alg00less.Func[T])
