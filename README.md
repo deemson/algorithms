@@ -1,8 +1,8 @@
-# Algorithms #
+# Algorithms
 
-## Summary ##
+## Summary
 
-This repo contains code that implements algorithms in Kotlin for both
+This repo contains code that implements algorithms in Go for both
 [Part 1](https://www.coursera.org/learn/algorithms-part1) and
 [Part 2](https://www.coursera.org/learn/algorithms-part2) Coursera courses.
 
@@ -10,12 +10,25 @@ There are several abstractions added to reduce code duplication and make it
 a bit more re-usable across different algorithms. There are also tests
 added to check the implementations and show how the algorithms are used.
 
-## How to use ##
+This README give only an overview of the structure of the repository.
+Please refer to the linked doc pages for each section and also check
+unit tests and code comments.
 
-The code in this repo is meant to be an educational supplement. You can use
-`./gradlew test` (or `./gradlew.bat test` if you're on Windows) to run all tests.
+## Structure
+
+The repository structured as a number of packages prefixed algXX, where
+XX is a zero-prefixed number used to bring ordering to the packages on the file system.
+It does not correspond to the chapter numbers in the course, though.
 
 ## Contents ##
+
+### 00. Utility Packages
+
+There is a number of utility packages prefixed alg00, that are used throughout many of
+the algorithms. The code there is extracted common code: it was factored out to reduce code
+duplication across actual algorithm implementations.
+
+
 
 ### 01. Union Find ###
 
