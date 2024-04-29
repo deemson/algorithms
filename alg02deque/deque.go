@@ -24,8 +24,8 @@ func (d Deque[T]) Get(index int) T {
 }
 
 func (d Deque[T]) Range(fromIndex, toIndex int) []T {
-	ensureIndexLessThanSize(fromIndex, d.Size())
-	ensureIndexLessThanSize(toIndex, d.Size())
+	ensureIndexLessOrEqualSize(fromIndex, d.Size())
+	ensureIndexLessOrEqualSize(toIndex, d.Size())
 	ensureFromLessTo(fromIndex, toIndex)
 	return d.algorithm.Range(fromIndex, toIndex)
 }

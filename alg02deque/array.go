@@ -1,6 +1,8 @@
 package alg02deque
 
-import "github.com/deemson/algorithms/alg00indexed"
+import (
+	"github.com/deemson/algorithms/alg00indexed"
+)
 
 func Array[T any](capacity int) Deque[T] {
 	return Deque[T]{
@@ -36,7 +38,7 @@ func (a *ArrayAlgorithm[T]) Get(index int) T {
 func (a *ArrayAlgorithm[T]) Range(fromIndex, toIndex int) []T {
 	slice := make([]T, toIndex-fromIndex)
 	for index := fromIndex; index < toIndex; index++ {
-		slice[index] = a.Get(index)
+		slice[index-fromIndex] = a.Get(index)
 	}
 	return slice
 }
