@@ -3,6 +3,7 @@ package alg05sorting_test
 import (
 	"github.com/deemson/algorithms/alg00indexed"
 	"github.com/deemson/algorithms/alg00less"
+	"github.com/deemson/algorithms/alg02deque"
 	"github.com/deemson/algorithms/alg05sorting"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -51,8 +52,16 @@ func TestSort_BunchOfInts(t *testing.T) {
 			4242,
 			100500,
 		}
-		sort(alg00indexed.Slice(actual))
-		assert.Equal(t, expected, actual)
+		t.Run("Slice", func(t *testing.T) {
+			sort(alg00indexed.Slice(actual))
+			assert.Equal(t, expected, actual)
+		})
+		t.Run("Deque", func(t *testing.T) {
+			deque := alg02deque.Array[int](2)
+			deque.AddAllLast(actual...)
+			sort(deque)
+			assert.Equal(t, expected, deque.ToSlice())
+		})
 	})
 }
 
@@ -62,5 +71,15 @@ func TestSort_BunchOfStrings(t *testing.T) {
 		expected := []string{"algorithm", "main", "super"}
 		sort(alg00indexed.Slice(actual))
 		assert.Equal(t, expected, actual)
+		t.Run("Slice", func(t *testing.T) {
+			sort(alg00indexed.Slice(actual))
+			assert.Equal(t, expected, actual)
+		})
+		t.Run("Deque", func(t *testing.T) {
+			deque := alg02deque.Array[string](2)
+			deque.AddAllLast(actual...)
+			sort(deque)
+			assert.Equal(t, expected, deque.ToSlice())
+		})
 	})
 }
