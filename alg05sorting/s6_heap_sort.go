@@ -15,6 +15,6 @@ func HeapSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T]) {
 		alg00indexed.Swap(indexed, 0, index)
 		// as binary heap order now might be violated when we moved arbitrary element
 		// to the top, we sink it down to the last unsorted index
-		alg06binaryheap.SinkFromTop(indexed, reversedLess, index)
+		alg06binaryheap.SinkFromTop(indexed, reversedLess, index-1)
 	}
 }
