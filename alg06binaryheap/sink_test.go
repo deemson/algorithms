@@ -9,7 +9,7 @@ import (
 )
 
 func TestSink_Simple_TopToBottom(t *testing.T) {
-	slice := []string{"C", "B", "A"}
+	slice := sliceStringIntoCharacters("CBA")
 	alg06binaryheap.SinkFromTopToBottom(alg00indexed.Slice(slice), alg00less.String)
-	assert.Equal(t, []string{"A", "B", "C"}, slice)
+	assert.Equal(t, sliceStringIntoCharacters("ABC"), slice)
 }

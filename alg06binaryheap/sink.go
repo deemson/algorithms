@@ -21,6 +21,10 @@ func Sink[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T], fromIn
 	}
 }
 
+func SinkFromTop[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T], to int) {
+	Sink(indexed, less, 0, to)
+}
+
 func SinkToBottom[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T], fromIndex int) {
 	Sink(indexed, less, fromIndex, indexed.Size()-1)
 }

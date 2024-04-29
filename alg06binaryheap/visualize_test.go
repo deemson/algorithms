@@ -10,11 +10,11 @@ import (
 
 func TestVisualize(t *testing.T) {
 	testCases := []struct {
-		input    []string
+		input    string
 		expected []string
 	}{
 		{
-			input: []string{"A", "B", "C"},
+			input: "ABC",
 			expected: []string{
 				"A",
 				"  B",
@@ -22,7 +22,7 @@ func TestVisualize(t *testing.T) {
 			},
 		},
 		{
-			input: []string{"A", "B", "C", "D", "E", "F", "G"},
+			input: "ABCDEFG",
 			expected: []string{
 				"A",
 				"  B",
@@ -34,7 +34,7 @@ func TestVisualize(t *testing.T) {
 			},
 		},
 		{
-			input: []string{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"},
+			input: "ABCDEFGHIJKLMNO",
 			expected: []string{
 				"A",
 				"  B",
@@ -55,10 +55,11 @@ func TestVisualize(t *testing.T) {
 		},
 	}
 	for _, testCase := range testCases {
-		t.Run(strings.Join(testCase.input, ""), func(t *testing.T) {
+		t.Run(testCase.input, func(t *testing.T) {
+			sliceOfCharStrings := sliceStringIntoCharacters(testCase.input)
 			actual := alg06binaryheap.Visualize(
-				alg00indexed.Slice(testCase.input),
-				func(item string) string { return item },
+				alg00indexed.Slice(sliceOfCharStrings),
+				stringAsIs,
 			)
 			assert.Equal(t, strings.Join(testCase.expected, "\n"), actual)
 		})
