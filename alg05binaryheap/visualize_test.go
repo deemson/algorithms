@@ -1,8 +1,8 @@
-package alg06binaryheap_test
+package alg05binaryheap_test
 
 import (
 	"github.com/deemson/algorithms/alg00indexed"
-	"github.com/deemson/algorithms/alg06binaryheap"
+	"github.com/deemson/algorithms/alg05binaryheap"
 	"github.com/stretchr/testify/assert"
 	"strings"
 	"testing"
@@ -57,7 +57,7 @@ func TestVisualize(t *testing.T) {
 	for _, testCase := range testCases {
 		t.Run(testCase.input, func(t *testing.T) {
 			sliceOfCharStrings := sliceStringIntoCharacters(testCase.input)
-			actual := alg06binaryheap.Visualize(
+			actual := alg05binaryheap.Visualize(
 				alg00indexed.Slice(sliceOfCharStrings),
 				stringAsIs,
 			)

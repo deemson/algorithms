@@ -1,23 +1,23 @@
-package alg05sorting_test
+package alg06sorting_test
 
 import (
 	"github.com/deemson/algorithms/alg00indexed"
 	"github.com/deemson/algorithms/alg00less"
 	"github.com/deemson/algorithms/alg02deque"
-	"github.com/deemson/algorithms/alg05sorting"
+	"github.com/deemson/algorithms/alg06sorting"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func forEachAlgorithm[T any](t *testing.T, less alg00less.Less[T], f func(t *testing.T, sort func(indexed alg00indexed.Indexed[T]))) {
-	sorts := map[string]alg05sorting.SortFunc[T]{
-		"SelectionSort":     alg05sorting.SelectionSort[T],
-		"InsertionSort":     alg05sorting.InsertionSort[T],
-		"ShellSort":         alg05sorting.ShellSort[T],
-		"MergeSort":         alg05sorting.MergeSort[T],
-		"BottomUpMergeSort": alg05sorting.BottomUpMergeSort[T],
-		"QuickSort":         alg05sorting.QuickSort[T],
-		"HeapSort":          alg05sorting.HeapSort[T],
+	sorts := map[string]alg06sorting.SortFunc[T]{
+		"SelectionSort":     alg06sorting.SelectionSort[T],
+		"InsertionSort":     alg06sorting.InsertionSort[T],
+		"ShellSort":         alg06sorting.ShellSort[T],
+		"MergeSort":         alg06sorting.MergeSort[T],
+		"BottomUpMergeSort": alg06sorting.BottomUpMergeSort[T],
+		"QuickSort":         alg06sorting.QuickSort[T],
+		"HeapSort":          alg06sorting.HeapSort[T],
 	}
 	for name, sort := range sorts {
 		t.Run(name, func(t *testing.T) {

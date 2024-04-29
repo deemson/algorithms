@@ -1,4 +1,4 @@
-package alg06binaryheap
+package alg05binaryheap
 
 import (
 	"fmt"

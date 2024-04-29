@@ -1,4 +1,4 @@
-package alg05sorting
+package alg06sorting
 
 import (
 	"github.com/deemson/algorithms/alg00indexed"

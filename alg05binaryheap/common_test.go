@@ -1,4 +1,4 @@
-package alg06binaryheap_test
+package alg05binaryheap_test
 
 func sliceStringIntoCharacters(str string) []string {
 	slice := make([]string, len(str))
