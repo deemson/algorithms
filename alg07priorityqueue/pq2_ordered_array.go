@@ -22,7 +22,7 @@ type OrderedArrayAlgorithm[T any] struct {
 
 func (a OrderedArrayAlgorithm[T]) Push(item T) {
 	a.deque.AddLast(item)
-	otherItems := a.deque.Range(0, a.deque.Size()-1)
+	otherItems := alg00indexed.ToSlice[T](a.deque)
 	for index := a.deque.Size() - 2; index >= 0; index-- {
 		if a.less(otherItems[index], item) {
 			break
