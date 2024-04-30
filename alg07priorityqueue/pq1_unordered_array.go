@@ -28,11 +28,19 @@ func (a UnorderedArrayAlgorithm[T]) Push(item T) {
 func (a UnorderedArrayAlgorithm[T]) Pop() T {
 	minIndex := 0
 	minElement := a.deque.Get(0)
-	for index, item := range a.deque.Range(1, a.deque.Size()) {
+	iterator := a.deque.Iterator()
+	index := 0
+	for iterator.HasNext() {
+		if index == 0 {
+			index++
+			continue
+		}
+		item := iterator.Next()
 		if a.less(item, minElement) {
-			minIndex = index + 1
+			minIndex = index
 			minElement = item
 		}
+		index++
 	}
 	alg00indexed.Swap[T](a.deque, minIndex, a.deque.Size()-1)
 	return a.deque.RemoveLast()
