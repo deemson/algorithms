@@ -15,6 +15,7 @@ func UnorderedArray[T any](less alg00less.Less[T], capacity int) PriorityQueue[T
 	}
 }
 
+// UnorderedArrayAlgorithm scales as O(1) for inserts and as O(N) for deletes
 type UnorderedArrayAlgorithm[T any] struct {
 	deque alg02deque.Deque[T]
 	less  alg00less.Less[T]
