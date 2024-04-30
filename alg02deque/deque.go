@@ -1,13 +1,17 @@
 package alg02deque
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/deemson/algorithms/alg00indexed"
+	"github.com/deemson/algorithms/alg00iterator"
+)
 
 type Deque[T any] struct {
 	algorithm Algorithm[T]
 }
 
 func (d Deque[T]) ToSlice() []T {
-	return d.algorithm.Range(0, d.Size())
+	return alg00indexed.ToSlice[T](d.algorithm)
 }
 
 func (d Deque[T]) Size() int {
@@ -23,16 +27,13 @@ func (d Deque[T]) Get(index int) T {
 	return d.algorithm.Get(index)
 }
 
-func (d Deque[T]) Range(fromIndex, toIndex int) []T {
-	ensureIndexLessOrEqualSize(fromIndex, d.Size())
-	ensureIndexLessOrEqualSize(toIndex, d.Size())
-	ensureFromLessTo(fromIndex, toIndex)
-	return d.algorithm.Range(fromIndex, toIndex)
-}
-
 func (d Deque[T]) Set(index int, item T) {
 	ensureIndexLessThanSize(index, d.Size())
 	d.algorithm.Set(index, item)
+}
+
+func (d Deque[T]) Iterator() alg00iterator.Iterator[T] {
+	return d.algorithm.Iterator()
 }
 
 func (d Deque[T]) AddAtIndex(index int, item T) {
@@ -91,11 +92,5 @@ func ensureIndexLessOrEqualSize(index int, size int) {
 func ensureNotEmpty(size int) {
 	if size == 0 {
 		panic("Deque must not be empty")
-	}
-}
-
-func ensureFromLessTo(fromIndex, toIndex int) {
-	if fromIndex > toIndex {
-		panic(fmt.Sprintf("Deque from range index (%d) must be less or equal to range index (%d)", fromIndex, toIndex))
 	}
 }

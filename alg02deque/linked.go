@@ -1,5 +1,7 @@
 package alg02deque
 
+import "github.com/deemson/algorithms/alg00iterator"
+
 func Linked[T any]() Deque[T] {
 	return Deque[T]{
 		algorithm: &LinkedAlgorithm[T]{
@@ -24,15 +26,18 @@ func (a *LinkedAlgorithm[T]) Get(index int) T {
 	return a.nodeAtIndex(index).item
 }
 
-func (a *LinkedAlgorithm[T]) Range(fromIndex, toIndex int) []T {
-	slice := make([]T, toIndex-fromIndex)
-	node := a.nodeAtIndex(fromIndex)
-	slice[0] = node.item
-	for index := fromIndex + 1; index < toIndex; index++ {
-		node = node.next
-		slice[index] = node.item
+func (a *LinkedAlgorithm[T]) Iterator() alg00iterator.Iterator[T] {
+	currentNode := a.head
+	return alg00iterator.Iterator[T]{
+		HasNext: func() bool {
+			return currentNode != nil
+		},
+		Next: func() T {
+			item := currentNode.item
+			currentNode = currentNode.next
+			return item
+		},
 	}
-	return slice
 }
 
 func (a *LinkedAlgorithm[T]) Set(index int, item T) {

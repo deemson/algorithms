@@ -2,6 +2,7 @@ package alg02deque
 
 import (
 	"github.com/deemson/algorithms/alg00indexed"
+	"github.com/deemson/algorithms/alg00iterator"
 )
 
 func Array[T any](capacity int) Deque[T] {
@@ -35,16 +36,21 @@ func (a *ArrayAlgorithm[T]) Get(index int) T {
 	return a.array[a.normalizeIndex(index)].(T)
 }
 
-func (a *ArrayAlgorithm[T]) Range(fromIndex, toIndex int) []T {
-	slice := make([]T, toIndex-fromIndex)
-	for index := fromIndex; index < toIndex; index++ {
-		slice[index-fromIndex] = a.Get(index)
-	}
-	return slice
-}
-
 func (a *ArrayAlgorithm[T]) Set(index int, item T) {
 	a.array[a.normalizeIndex(index)] = item
+}
+
+func (a *ArrayAlgorithm[T]) Iterator() alg00iterator.Iterator[T] {
+	index := 0
+	return alg00iterator.Iterator[T]{
+		HasNext: func() bool {
+			return index < a.Size()
+		},
+		Next: func() T {
+			index++
+			return a.Get(index - 1)
+		},
+	}
 }
 
 func (a *ArrayAlgorithm[T]) AddAtIndex(index int, item T) {

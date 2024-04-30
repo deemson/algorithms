@@ -74,12 +74,3 @@ func TestDeque_RemoveFromEmpty(t *testing.T) {
 		deque.RemoveLast()
 	})
 }
-
-func TestDeque_Range(t *testing.T) {
-	forEachAlgorithm[int](t, func(t *testing.T, deque alg02deque.Deque[int]) {
-		expected := []int{1, 2, 3, 4, 5}
-		deque.AddAllLast(expected...)
-		actual := deque.Range(0, deque.Size())
-		assert.Equal(t, expected, actual)
-	})
-}

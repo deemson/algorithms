@@ -1,10 +1,9 @@
 package alg02deque
 
+import "github.com/deemson/algorithms/alg00indexed"
+
 type Algorithm[T any] interface {
-	Size() int
-	Get(index int) T
-	Range(fromIndex, toIndex int) []T
-	Set(index int, item T)
+	alg00indexed.Indexed[T]
 	AddAtIndex(index int, item T)
 	RemoveAtIndex(index int) T
 }
