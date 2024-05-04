@@ -9,7 +9,7 @@ import (
 type HashFunc[T any] func(item T) uint32
 
 func HashString(value string) uint32 {
-	hash := int32(0)
+	hash := int32(7)
 	for _, character := range value {
 		hash = 31*hash + character
 	}
