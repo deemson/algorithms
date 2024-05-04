@@ -67,9 +67,7 @@ func (a RankedArrayAlgorithm[K, V]) Delete(key K) bool {
 }
 
 func (a RankedArrayAlgorithm[K, V]) Keys() alg00iterator.Iterator[K] {
-	return alg00iterator.Unpack(a.deque.Iterator(), func(item keyValuePair[K, V]) K {
-		return item.key
-	})
+	return alg00iterator.Unpack(a.deque.Iterator(), unpackKey[K, V])
 }
 
 // rank returns the number of keys in this symbol table strictly less than key

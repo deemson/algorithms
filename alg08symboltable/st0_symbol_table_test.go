@@ -7,10 +7,11 @@ import (
 	"testing"
 )
 
-func forEachAlgorithm[K, V any](t *testing.T, compare alg00compare.Func[K], f func(t *testing.T, symbolTable alg08symboltable.SymbolTable[K, V])) {
+func forEachAlgorithm[K, V any](t *testing.T, compare alg00compare.Func[K], hash alg08symboltable.HashFunc[K], f func(t *testing.T, symbolTable alg08symboltable.SymbolTable[K, V])) {
 	symbolTables := map[string]alg08symboltable.SymbolTable[K, V]{
 		"UnorderedLinked": alg08symboltable.UnorderedLinked[K, V](alg00compare.AsEqual(compare)),
 		"RankedArray":     alg08symboltable.RankedArray[K, V](compare, 2),
+		"HashTable":       alg08symboltable.HashTable[K, V](hash, alg00compare.AsEqual(compare), 2, 0.75),
 	}
 	for name, symbolTable := range symbolTables {
 		t.Run(name, func(t *testing.T) {
@@ -20,7 +21,7 @@ func forEachAlgorithm[K, V any](t *testing.T, compare alg00compare.Func[K], f fu
 }
 
 func TestSymbolTable(t *testing.T) {
-	forEachAlgorithm[string, int](t, alg00compare.String, func(t *testing.T, symbolTable alg08symboltable.SymbolTable[string, int]) {
+	forEachAlgorithm[string, int](t, alg00compare.String, alg08symboltable.HashString, func(t *testing.T, symbolTable alg08symboltable.SymbolTable[string, int]) {
 		symbolTable.Set("one", 1)
 		symbolTable.Set("two", 2)
 		symbolTable.Set("three", 3)
@@ -36,7 +37,7 @@ func TestSymbolTable(t *testing.T) {
 }
 
 func TestSymbolTable_GetNonExistent(t *testing.T) {
-	forEachAlgorithm[string, int](t, alg00compare.String, func(t *testing.T, symbolTable alg08symboltable.SymbolTable[string, int]) {
+	forEachAlgorithm[string, int](t, alg00compare.String, alg08symboltable.HashString, func(t *testing.T, symbolTable alg08symboltable.SymbolTable[string, int]) {
 		defer func(t *testing.T) {
 			r := recover()
 			assert.Equal(t, `symbol table does not contain key '"non-existent"'`, r)
@@ -46,7 +47,7 @@ func TestSymbolTable_GetNonExistent(t *testing.T) {
 }
 
 func TestSymbolTable_DeleteNonExistent(t *testing.T) {
-	forEachAlgorithm[string, int](t, alg00compare.String, func(t *testing.T, symbolTable alg08symboltable.SymbolTable[string, int]) {
+	forEachAlgorithm[string, int](t, alg00compare.String, alg08symboltable.HashString, func(t *testing.T, symbolTable alg08symboltable.SymbolTable[string, int]) {
 		defer func(t *testing.T) {
 			r := recover()
 			assert.Equal(t, `symbol table does not contain key '"non-existent"'`, r)

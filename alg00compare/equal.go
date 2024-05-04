@@ -7,3 +7,8 @@ func AsEqual[T any](compare Func[T]) EqualFunc[T] {
 		return compare(item1, item2) == Equal
 	}
 }
+
+var (
+	StringEqual = AsEqual(String)
+	IntEqual    = AsEqual(Int)
+)
