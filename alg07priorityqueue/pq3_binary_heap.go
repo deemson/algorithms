@@ -1,13 +1,13 @@
 package alg07priorityqueue
 
 import (
+	"github.com/deemson/algorithms/alg00compare"
 	"github.com/deemson/algorithms/alg00indexed"
-	"github.com/deemson/algorithms/alg00less"
 	"github.com/deemson/algorithms/alg02deque"
 	"github.com/deemson/algorithms/alg05binaryheap"
 )
 
-func BinaryHeap[T any](less alg00less.Less[T], capacity int) PriorityQueue[T] {
+func BinaryHeap[T any](less alg00compare.LessFunc[T], capacity int) PriorityQueue[T] {
 	return PriorityQueue[T]{
 		algorithm: BinaryHeapAlgorithm[T]{
 			deque: alg02deque.Array[T](capacity),
@@ -18,7 +18,7 @@ func BinaryHeap[T any](less alg00less.Less[T], capacity int) PriorityQueue[T] {
 
 type BinaryHeapAlgorithm[T any] struct {
 	deque alg02deque.Deque[T]
-	less  alg00less.Less[T]
+	less  alg00compare.LessFunc[T]
 }
 
 func (a BinaryHeapAlgorithm[T]) Push(item T) {

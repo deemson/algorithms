@@ -1,11 +1,11 @@
 package alg05binaryheap
 
 import (
+	"github.com/deemson/algorithms/alg00compare"
 	"github.com/deemson/algorithms/alg00indexed"
-	"github.com/deemson/algorithms/alg00less"
 )
 
-func Sink[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T], fromIndex, toIndex int) {
+func Sink[T any](indexed alg00indexed.Indexed[T], less alg00compare.LessFunc[T], fromIndex, toIndex int) {
 	parentIndex := fromIndex
 	childIndex := ChildIndex(parentIndex)
 	for childIndex <= toIndex {
@@ -21,14 +21,14 @@ func Sink[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T], fromIn
 	}
 }
 
-func SinkFromTop[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T], to int) {
+func SinkFromTop[T any](indexed alg00indexed.Indexed[T], less alg00compare.LessFunc[T], to int) {
 	Sink(indexed, less, 0, to)
 }
 
-func SinkToBottom[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T], fromIndex int) {
+func SinkToBottom[T any](indexed alg00indexed.Indexed[T], less alg00compare.LessFunc[T], fromIndex int) {
 	Sink(indexed, less, fromIndex, indexed.Size()-1)
 }
 
-func SinkFromTopToBottom[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T]) {
+func SinkFromTopToBottom[T any](indexed alg00indexed.Indexed[T], less alg00compare.LessFunc[T]) {
 	SinkToBottom(indexed, less, 0)
 }

@@ -2,9 +2,9 @@ package alg08symboltable
 
 import (
 	"fmt"
+	"github.com/deemson/algorithms/alg00compare"
 	"github.com/deemson/algorithms/alg00indexed"
 	"github.com/deemson/algorithms/alg00iterator"
-	"github.com/deemson/algorithms/alg00less"
 	"github.com/deemson/algorithms/alg06sorting"
 )
 
@@ -64,7 +64,7 @@ func (d SymbolTable[K, V]) Keys() alg00iterator.Iterator[K] {
 	return d.algorithm.Keys()
 }
 
-func (d SymbolTable[K, V]) SortedKeysSlice(less alg00less.Less[K]) []K {
+func (d SymbolTable[K, V]) SortedKeysSlice(less alg00compare.LessFunc[K]) []K {
 	slice := make([]K, d.Size())
 	iterator := d.Keys()
 	index := 0

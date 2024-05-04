@@ -1,8 +1,8 @@
 package alg06sorting
 
 import (
+	"github.com/deemson/algorithms/alg00compare"
 	"github.com/deemson/algorithms/alg00indexed"
-	"github.com/deemson/algorithms/alg00less"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -13,7 +13,7 @@ func TestMerge(t *testing.T) {
 	merge(
 		alg00indexed.Slice(actual),
 		alg00indexed.Slice(make([]int, len(actual))),
-		alg00less.Int,
+		alg00compare.IntLess,
 		0, 2, 5,
 	)
 	assert.Equal(t, expected, actual)

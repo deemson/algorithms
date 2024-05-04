@@ -1,8 +1,8 @@
 package alg06sorting
 
 import (
+	"github.com/deemson/algorithms/alg00compare"
 	"github.com/deemson/algorithms/alg00indexed"
-	"github.com/deemson/algorithms/alg00less"
 )
 
 // ShellSort is similar to previous algorithm (InsertionSort).
@@ -14,7 +14,7 @@ import (
 // an InsertionSort when the array is almost sorted.
 //
 // The worst-case number of compares used by shell sort with 3x+1 sequence is O(N^1.5).
-func ShellSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T]) {
+func ShellSort[T any](indexed alg00indexed.Indexed[T], less alg00compare.LessFunc[T]) {
 	step := 1
 	// Choosing the biggest step < indexed.Size() from Knuth's shell sort step sequence (3*x + 1).
 	for step < indexed.Size()/3 {

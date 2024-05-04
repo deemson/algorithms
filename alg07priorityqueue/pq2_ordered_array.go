@@ -1,12 +1,12 @@
 package alg07priorityqueue
 
 import (
+	"github.com/deemson/algorithms/alg00compare"
 	"github.com/deemson/algorithms/alg00indexed"
-	"github.com/deemson/algorithms/alg00less"
 	"github.com/deemson/algorithms/alg02deque"
 )
 
-func OrderedArray[T any](less alg00less.Less[T], capacity int) PriorityQueue[T] {
+func OrderedArray[T any](less alg00compare.LessFunc[T], capacity int) PriorityQueue[T] {
 	return PriorityQueue[T]{
 		algorithm: OrderedArrayAlgorithm[T]{
 			deque: alg02deque.Array[T](capacity),
@@ -17,7 +17,7 @@ func OrderedArray[T any](less alg00less.Less[T], capacity int) PriorityQueue[T] 
 
 type OrderedArrayAlgorithm[T any] struct {
 	deque alg02deque.Deque[T]
-	less  alg00less.Less[T]
+	less  alg00compare.LessFunc[T]
 }
 
 func (a OrderedArrayAlgorithm[T]) Push(item T) {

@@ -2,8 +2,8 @@ package alg05binaryheap
 
 import (
 	"fmt"
+	"github.com/deemson/algorithms/alg00compare"
 	"github.com/deemson/algorithms/alg00indexed"
-	"github.com/deemson/algorithms/alg00less"
 )
 
 func ParentIndex(index int) int {
@@ -14,14 +14,14 @@ func ChildIndex(index int) int {
 	return (index+1)*2 - 1
 }
 
-func BinaryHeapOrder[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T]) {
+func BinaryHeapOrder[T any](indexed alg00indexed.Indexed[T], less alg00compare.LessFunc[T]) {
 	// Starting at the middle as half of the array are leaf nodes and there's no point in sinking them
 	for index := indexed.Size()/2 - 1; index >= 0; index-- {
 		SinkToBottom(indexed, less, index)
 	}
 }
 
-func ValidateBinaryHeapOrder[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T]) error {
+func ValidateBinaryHeapOrder[T any](indexed alg00indexed.Indexed[T], less alg00compare.LessFunc[T]) error {
 	parentIndex := ParentIndex(indexed.Size() - 1)
 	for parentIndex <= 0 {
 		childIndex := ChildIndex(parentIndex)

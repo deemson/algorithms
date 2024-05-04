@@ -1,12 +1,12 @@
 package alg06sorting
 
 import (
+	"github.com/deemson/algorithms/alg00compare"
 	"github.com/deemson/algorithms/alg00indexed"
-	"github.com/deemson/algorithms/alg00less"
 	"math/rand"
 )
 
-func QuickSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T]) {
+func QuickSort[T any](indexed alg00indexed.Indexed[T], less alg00compare.LessFunc[T]) {
 	shuffle(indexed)
 	quickSort(indexed, less, 0, indexed.Size()-1)
 }
@@ -18,7 +18,7 @@ func shuffle[T any](indexed alg00indexed.Indexed[T]) {
 	}
 }
 
-func quickSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T], left, right int) {
+func quickSort[T any](indexed alg00indexed.Indexed[T], less alg00compare.LessFunc[T], left, right int) {
 	if left >= right {
 		return
 	}
@@ -30,7 +30,7 @@ func quickSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T], l
 // partition is the core of QuickSort. It ensures that randomly picked item from the array
 // is put in such a position, so that all the items to the left are smaller and all items to the right
 // are bigger. Function partition returns the index of the element after this is done.
-func partition[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T], left, right int) int {
+func partition[T any](indexed alg00indexed.Indexed[T], less alg00compare.LessFunc[T], left, right int) int {
 	partitioningItem := indexed.Get(left)
 	leftMarker := left + 1
 	rightMarker := right

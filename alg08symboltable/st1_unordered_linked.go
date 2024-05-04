@@ -1,12 +1,12 @@
 package alg08symboltable
 
 import (
-	"github.com/deemson/algorithms/alg00equal"
+	"github.com/deemson/algorithms/alg00compare"
 	"github.com/deemson/algorithms/alg00iterator"
 	"github.com/deemson/algorithms/alg02deque"
 )
 
-func UnorderedLinked[K, V any](equal alg00equal.Equal[K]) SymbolTable[K, V] {
+func UnorderedLinked[K, V any](equal alg00compare.EqualFunc[K]) SymbolTable[K, V] {
 	return SymbolTable[K, V]{
 		algorithm: UnorderedLinkedAlgorithm[K, V]{
 			deque: alg02deque.Linked[keyValuePair[K, V]](),
@@ -17,7 +17,7 @@ func UnorderedLinked[K, V any](equal alg00equal.Equal[K]) SymbolTable[K, V] {
 
 type UnorderedLinkedAlgorithm[K, V any] struct {
 	deque alg02deque.Deque[keyValuePair[K, V]]
-	equal alg00equal.Equal[K]
+	equal alg00compare.EqualFunc[K]
 }
 
 func (a UnorderedLinkedAlgorithm[K, V]) Size() int {

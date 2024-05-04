@@ -1,8 +1,8 @@
 package alg06sorting
 
 import (
+	"github.com/deemson/algorithms/alg00compare"
 	"github.com/deemson/algorithms/alg00indexed"
-	"github.com/deemson/algorithms/alg00less"
 	"github.com/stretchr/testify/assert"
 	"sort"
 	"testing"
@@ -39,7 +39,7 @@ func TestPartition(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			actualIndex := partition(
 				alg00indexed.Slice(testCase.actual),
-				alg00less.Int,
+				alg00compare.IntLess,
 				0, len(testCase.actual)-1,
 			)
 			assert.Equal(t, testCase.expected, testCase.actual)

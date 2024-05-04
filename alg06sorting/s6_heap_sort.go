@@ -1,13 +1,15 @@
 package alg06sorting
 
 import (
+	"github.com/deemson/algorithms/alg00compare"
 	"github.com/deemson/algorithms/alg00indexed"
-	"github.com/deemson/algorithms/alg00less"
 	"github.com/deemson/algorithms/alg05binaryheap"
 )
 
-func HeapSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T]) {
-	reversedLess := alg00less.Reversed(less)
+func HeapSort[T any](indexed alg00indexed.Indexed[T], less alg00compare.LessFunc[T]) {
+	reversedLess := func(item1, item2 T) bool {
+		return less(item2, item1)
+	}
 	// Binary heap order with reversed less so that max (instead of min) element is on top
 	alg05binaryheap.BinaryHeapOrder(indexed, reversedLess)
 	for index := indexed.Size() - 1; index > 0; index-- {

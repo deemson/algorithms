@@ -1,15 +1,15 @@
 package alg06sorting_test
 
 import (
+	"github.com/deemson/algorithms/alg00compare"
 	"github.com/deemson/algorithms/alg00indexed"
-	"github.com/deemson/algorithms/alg00less"
 	"github.com/deemson/algorithms/alg02deque"
 	"github.com/deemson/algorithms/alg06sorting"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
-func forEachAlgorithm[T any](t *testing.T, less alg00less.Less[T], f func(t *testing.T, sort func(indexed alg00indexed.Indexed[T]))) {
+func forEachAlgorithm[T any](t *testing.T, compare alg00compare.Func[T], f func(t *testing.T, sort func(indexed alg00indexed.Indexed[T]))) {
 	sorts := map[string]alg06sorting.SortFunc[T]{
 		"SelectionSort":     alg06sorting.SelectionSort[T],
 		"InsertionSort":     alg06sorting.InsertionSort[T],
@@ -22,14 +22,14 @@ func forEachAlgorithm[T any](t *testing.T, less alg00less.Less[T], f func(t *tes
 	for name, sort := range sorts {
 		t.Run(name, func(t *testing.T) {
 			f(t, func(indexed alg00indexed.Indexed[T]) {
-				sort(indexed, less)
+				sort(indexed, alg00compare.AsLess(compare))
 			})
 		})
 	}
 }
 
 func TestSort_BunchOfInts(t *testing.T) {
-	forEachAlgorithm(t, alg00less.Int, func(t *testing.T, sort func(indexed alg00indexed.Indexed[int])) {
+	forEachAlgorithm(t, alg00compare.Int, func(t *testing.T, sort func(indexed alg00indexed.Indexed[int])) {
 		actual := []int{
 			42,
 			17,
@@ -66,7 +66,7 @@ func TestSort_BunchOfInts(t *testing.T) {
 }
 
 func TestSort_BunchOfStrings(t *testing.T) {
-	forEachAlgorithm(t, alg00less.String, func(t *testing.T, sort func(indexed alg00indexed.Indexed[string])) {
+	forEachAlgorithm(t, alg00compare.String, func(t *testing.T, sort func(indexed alg00indexed.Indexed[string])) {
 		actual := []string{"super", "algorithm", "main"}
 		expected := []string{"algorithm", "main", "super"}
 		sort(alg00indexed.Slice(actual))

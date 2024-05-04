@@ -1,20 +1,20 @@
 package alg06sorting
 
 import (
+	"github.com/deemson/algorithms/alg00compare"
 	"github.com/deemson/algorithms/alg00indexed"
-	"github.com/deemson/algorithms/alg00less"
 )
 
 // MergeSort is a divide and conquer (split-sort-merge) algorithm.
 // The execution time is as fast as O(N*log2(N)).
 // Traditional implementation via recursion.
-func MergeSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T]) {
+func MergeSort[T any](indexed alg00indexed.Indexed[T], less alg00compare.LessFunc[T]) {
 	aux := alg00indexed.Slice(make([]T, indexed.Size()))
 	mergeSort(indexed, aux, less, 0, indexed.Size()-1)
 }
 
 // BottomUpMergeSort implements the same merge sort only without recursion
-func BottomUpMergeSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Less[T]) {
+func BottomUpMergeSort[T any](indexed alg00indexed.Indexed[T], less alg00compare.LessFunc[T]) {
 	aux := alg00indexed.Slice(make([]T, indexed.Size()))
 	// partitionSize size grows as 1 2 4 8 ...
 	partitionSize := 1
@@ -28,7 +28,7 @@ func BottomUpMergeSort[T any](indexed alg00indexed.Indexed[T], less alg00less.Le
 	}
 }
 
-func mergeSort[T any](indexed, aux alg00indexed.Indexed[T], less alg00less.Less[T], lo, hi int) {
+func mergeSort[T any](indexed, aux alg00indexed.Indexed[T], less alg00compare.LessFunc[T], lo, hi int) {
 	// If the thresholds overlap the sorting is done.
 	if lo >= hi {
 		return
@@ -44,9 +44,9 @@ func mergeSort[T any](indexed, aux alg00indexed.Indexed[T], less alg00less.Less[
 
 // merge is a core function in a divide and conquer algorithms of MergeSort and BottomUpMergeSort.
 // merge merges two parts of the indexed array together via temporary aux storage array.
-// It assumes that both halves of the array are sorted individually and they need to be merged
+// It assumes that both halves of the array are sorted individually, and they need to be merged
 // together so that the result is sorted as well.
-func merge[T any](indexed, aux alg00indexed.Indexed[T], less alg00less.Less[T], lo, mid, hi int) {
+func merge[T any](indexed, aux alg00indexed.Indexed[T], less alg00compare.LessFunc[T], lo, mid, hi int) {
 	for index := lo; index <= hi; index++ {
 		aux.Set(index, indexed.Get(index))
 	}
