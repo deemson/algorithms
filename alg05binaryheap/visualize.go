@@ -1,0 +1,34 @@
+package alg05binaryheap
+
+import (
+	"strings"
+)
+
+func findIndentationLevel(index int) int {
+	level := -1
+	powerOf2 := 1
+	for powerOf2 <= index+1 {
+		powerOf2 *= 2
+		level++
+	}
+	return level
+}
+
+func visualize[T any](slice []T, toString func(item T) string, atIndex int) string {
+	indentationLevel := findIndentationLevel(atIndex)
+	lines := make([]string, 1, 3)
+	lines[0] = strings.Repeat("  ", indentationLevel) + toString(slice[atIndex])
+	childIndex := ChildIndex(atIndex)
+	if childIndex < len(slice) {
+		lines = append(lines, visualize(slice, toString, childIndex))
+		childIndex++
+		if childIndex < len(slice) {
+			lines = append(lines, visualize(slice, toString, childIndex))
+		}
+	}
+	return strings.Join(lines, "\n")
+}
+
+func Visualize[T any](slice []T, toString func(item T) string) string {
+	return visualize(slice, toString, 0)
+}
