@@ -3,20 +3,20 @@ package alg03queue_test
 import (
 	"github.com/deemson/algorithms/alg03queue"
 	"github.com/stretchr/testify/assert"
-	"reflect"
-	"strings"
 	"testing"
 )
 
 func forEachAlgorithm[T any](t *testing.T, f func(t *testing.T, queue alg03queue.Queue[T])) {
-	for _, queue := range []alg03queue.Queue[T]{
-		alg03queue.Array[T](2),
-		alg03queue.Linked[T](),
-	} {
-		name := reflect.ValueOf(queue).FieldByName("deque").FieldByName("algorithm").Elem().Type().Elem().Name()
-		name = name[:strings.Index(name, "[")]
-		t.Run(name, func(t *testing.T) {
-			f(t, queue)
+	namedQueues := []struct {
+		name  string
+		queue alg03queue.Queue[T]
+	}{
+		{"ArrayQueue", alg03queue.Array[T](2)},
+		{"LinkedQueue", alg03queue.Linked[T]()},
+	}
+	for _, namedQueue := range namedQueues {
+		t.Run(namedQueue.name, func(t *testing.T) {
+			f(t, namedQueue.queue)
 		})
 	}
 }

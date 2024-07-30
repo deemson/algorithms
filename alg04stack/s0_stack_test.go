@@ -3,20 +3,20 @@ package alg04stack_test
 import (
 	"github.com/deemson/algorithms/alg04stack"
 	"github.com/stretchr/testify/assert"
-	"reflect"
-	"strings"
 	"testing"
 )
 
 func forEachAlgorithm[T any](t *testing.T, f func(t *testing.T, queue alg04stack.Stack[T])) {
-	for _, queue := range []alg04stack.Stack[T]{
-		alg04stack.Array[T](2),
-		alg04stack.Linked[T](),
-	} {
-		name := reflect.ValueOf(queue).FieldByName("deque").FieldByName("algorithm").Elem().Type().Elem().Name()
-		name = name[:strings.Index(name, "[")]
-		t.Run(name, func(t *testing.T) {
-			f(t, queue)
+	namedStacks := []struct {
+		name  string
+		stack alg04stack.Stack[T]
+	}{
+		{"ArrayStack", alg04stack.Array[T](2)},
+		{"LinkedStack", alg04stack.Linked[T]()},
+	}
+	for _, namedStack := range namedStacks {
+		t.Run(namedStack.name, func(t *testing.T) {
+			f(t, namedStack.stack)
 		})
 	}
 }

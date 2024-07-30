@@ -3,20 +3,20 @@ package alg02deque_test
 import (
 	"github.com/deemson/algorithms/alg02deque"
 	"github.com/stretchr/testify/assert"
-	"reflect"
-	"strings"
 	"testing"
 )
 
 func forEachAlgorithm[T any](t *testing.T, f func(t *testing.T, deque alg02deque.Deque[T])) {
-	for _, deque := range []alg02deque.Deque[T]{
-		alg02deque.Array[T](2),
-		alg02deque.Linked[T](),
-	} {
-		name := reflect.ValueOf(deque).FieldByName("algorithm").Elem().Type().Elem().Name()
-		name = name[:strings.Index(name, "[")]
-		t.Run(name, func(t *testing.T) {
-			f(t, deque)
+	namedDeques := []struct {
+		name  string
+		deque alg02deque.Deque[T]
+	}{
+		{"ArrayDeque", alg02deque.Array[T](2)},
+		{"LinkedDeque", alg02deque.Linked[T]()},
+	}
+	for _, namedDeque := range namedDeques {
+		t.Run(namedDeque.name, func(t *testing.T) {
+			f(t, namedDeque.deque)
 		})
 	}
 }
